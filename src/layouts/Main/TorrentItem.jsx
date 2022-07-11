@@ -1,15 +1,27 @@
+import { ArrowSmDownIcon, ArrowSmUpIcon } from "@heroicons/react/outline";
 import React from "react";
+import { toReadableSize, toReadableSpeed } from "../../utils/helpers";
 import { TORRENT_STATE } from "../../utils/torrentStates";
 
-export default function TorrentItem({ title, progress, state }) {
+export default function TorrentItem({
+  title,
+  progress,
+  state,
+  size,
+  downSpeed,
+  upSpeed,
+}) {
   return (
     <div className="flex flex-col gap-1 border rounded border-light px-2 py-3">
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-1">
         <div className="flex gap-1 align-middle">
           <StateIcon state={state} /> {title}
         </div>
-        <div className="flex-1"></div>
-        <div></div>
+        <div className="flex-1 text-neutral">{toReadableSize(size)}</div>
+        <div className="flex gap-3">
+          <SpeedIndicator speed={downSpeed} isDirectionUpload={false} />
+          <SpeedIndicator speed={upSpeed} isDirectionUpload={true} />
+        </div>
       </div>
       <div>
         <ProgressBar progress={progress} />
@@ -18,6 +30,18 @@ export default function TorrentItem({ title, progress, state }) {
   );
 }
 
+function SpeedIndicator({ speed, isDirectionUpload }) {
+  return (
+    <div className="flex items-center">
+      {isDirectionUpload ? (
+        <ArrowSmUpIcon className="h-5 w-5 text-red" />
+      ) : (
+        <ArrowSmDownIcon className="h-5 w-5 text-green" />
+      )}
+      {toReadableSpeed(speed)}
+    </div>
+  );
+}
 function ProgressBar({ progress = 0 }) {
   return (
     <div className="w-full h-2 bg-light rounded">

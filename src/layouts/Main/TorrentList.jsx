@@ -16,6 +16,9 @@ export default function TorrentList() {
           title={torrent.name}
           state={torrent.state}
           progress={torrent.progress}
+          size={torrent.size}
+          downSpeed={torrent.dlspeed}
+          upSpeed={torrent.upspeed}
         />
       ))}
     </div>
