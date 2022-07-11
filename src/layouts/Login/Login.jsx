@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login as loginApi } from "../../api/authenticationApi";
+import Authentication from "../../api/authenticationApi";
 import { InputPassword, InputText } from "../../components/Inputs";
 import PrimaryButton from "../../components/PrimaryButton";
 
@@ -16,8 +16,7 @@ export default function Login() {
   var formSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    let loginRes = await loginApi(login, passowrd);
-    console.log(loginRes);
+    let loginRes = await Authentication.login(login, passowrd);
     if (loginRes.ok) {
       navigate("/");
     } else {
@@ -39,7 +38,7 @@ export default function Login() {
           onChange={(e) => setPassowrd(e.target.value)}
         />
         {errorMessage !== "" && (
-          <div className="text-center text-danger">{errorMessage}</div>
+          <div className="text-center text-red">{errorMessage}</div>
         )}
         <PrimaryButton isLoading={isLoading}>Login</PrimaryButton>
       </form>

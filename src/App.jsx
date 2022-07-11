@@ -6,9 +6,10 @@ import {
   Outlet,
   Navigate,
 } from "react-router-dom";
-import { getMainData } from "./api/syncApi";
+import Sync from "./api/syncApi";
 import "./App.css";
-import { MainDataProvider } from "./context/mainDataContext";
+import { UpdateDataProvider } from "./context/updateDataContext";
+import { TorrentListProvider } from "./context/torrentListContext";
 import NotFoundLayout from "./layouts/404/NotFoundLayout";
 import Login from "./layouts/Login/Login";
 import MainLayout from "./layouts/Main/MainLayout";
@@ -23,7 +24,7 @@ function App() {
 
   useEffect(() => {
     setIsLoading(true);
-    getMainData().then((res) => {
+    Sync.getMainData().then((res) => {
       setMainData(res);
       setIsLoading(false);
     });
@@ -37,21 +38,23 @@ function App() {
   if (isLoading) return <div></div>;
   else
     return (
-      <MainDataProvider>
-        <Router>
-          <Routes>
-            {routes.map((route) => (
-              <Route
-                key={route.path}
-                element={<PrivateWrapper mainData={mainData} />}
-              >
-                <Route path={route.path} element={route.element} />
-              </Route>
-            ))}
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </Router>
-      </MainDataProvider>
+      <TorrentListProvider>
+        <UpdateDataProvider>
+          <Router>
+            <Routes>
+              {routes.map((route) => (
+                <Route
+                  key={route.path}
+                  element={<PrivateWrapper mainData={mainData} />}
+                >
+                  <Route path={route.path} element={route.element} />
+                </Route>
+              ))}
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </Router>
+        </UpdateDataProvider>
+      </TorrentListProvider>
     );
 }
 

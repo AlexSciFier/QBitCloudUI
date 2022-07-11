@@ -3,16 +3,17 @@ import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import LeftPanel from "../LeftPanel/LeftPanel";
 import { isMobile } from "react-device-detect";
-import { useMainData } from "../../context/mainDataContext";
+import { useUpdateData } from "../../context/updateDataContext";
 import TorrentList from "./TorrentList";
 
 export default function MainLayout() {
-  let { mainData, updateMainData } = useMainData();
-
-  console.log(mainData);
+  let { updateMainData, startUpdate, stopUpdate } = useUpdateData();
 
   useEffect(() => {
-    updateMainData();
+    startUpdate();
+    return () => {
+      stopUpdate();
+    };
   }, []);
 
   const [menuOpened, setMenuOpened] = useState(!isMobile);

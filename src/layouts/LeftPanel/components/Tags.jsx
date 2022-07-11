@@ -1,8 +1,8 @@
 import React from "react";
-import { useMainData } from "../../../context/mainDataContext";
+import { useUpdateData } from "../../../context/updateDataContext";
 
 export default function Tags() {
-  let { mainData } = useMainData();
+  let { mainData } = useUpdateData();
   return (
     <div>
       <div className="text-lg">Tags</div>

@@ -1,8 +1,8 @@
 import React from "react";
-import { useMainData } from "../../../context/mainDataContext";
+import { useUpdateData } from "../../../context/updateDataContext";
 
 export default function Categories() {
-  let { mainData } = useMainData();
+  let { mainData } = useUpdateData();
   let categories = Object.keys(mainData?.categories || {}).map((key) => ({
     name: mainData.categories[key].name,
     savePath: mainData.categories[key].savePath,
