@@ -5,12 +5,29 @@ const BASE_URL =
     : "http://localhost:8080";
 
 export var get = async (endpoint, params = {}) => {
-  var searchparams = "";
-  if (isEmpty(params) === false)
-    searchparams = "?" + new URLSearchParams(params).toString();
-  return await fetch(new URL(endpoint + searchparams, BASE_URL), {
+  var searchParams = "";
+  if (isEmpty(params) === false) {
+    let filteredParams = Object.entries(params).filter((entry) => {
+      if (entry[1]) return true;
+      return false;
+    });
+    searchParams = "?" + new URLSearchParams(filteredParams).toString();
+  }
+  let res = await fetch(new URL(endpoint + searchParams, BASE_URL), {
     credentials: "include",
   });
+
+  let rawContentType = res.headers.get("content-type")?.split(";");
+  let contentType = {
+    type: rawContentType[0].trim(),
+    charset: rawContentType[1]?.trim(),
+  };
+
+  if (res.ok) {
+    if (contentType.type === "application/json") return await res.json();
+    return await res.text();
+  }
+  return undefined;
 };
 
 export var postJSON = async (endpoint, data) => {
