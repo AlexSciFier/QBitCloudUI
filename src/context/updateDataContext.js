@@ -29,13 +29,20 @@ export function useUpdateData() {
 }
 
 export function UpdateDataProvider({ children }) {
-  let timer = useRef();
+  let timer = useRef(null);
+
   const [updatedData, setUpdateData] = useState();
   const [refreshRate, setRefreshRate] = useState(1500);
   const { updateTorrentList, deleteTorrents } = useTorrentList();
   const { updateCategories, deleteCategories } = useCategories();
   const { updateTags, deleteTags } = useTags();
   const { updateGlobalInfo } = useGlobalInfo();
+
+  useEffect(() => {
+    return () => {
+      stopUpdate();
+    };
+  }, []);
 
   useEffect(() => {
     if (updatedData?.torrents) updateTorrentList(updatedData.torrents);
@@ -73,8 +80,7 @@ export function UpdateDataProvider({ children }) {
   };
 
   const stopUpdate = () => {
-    clearInterval(timer);
-    timer = null;
+    clearInterval(timer.current);
   };
 
   return (

@@ -23,14 +23,12 @@ function PrivateWrapper({ isLoggedIn }) {
 function App() {
   const { isLoggedIn, setIsLoggedIn } = useIsLoggedIn();
   const [isLoading, setIsLoading] = useState(true);
-  const { setUpdateData } = useUpdateData();
 
   useEffect(() => {
     setIsLoading(true);
     Sync.getMainData().then((res) => {
       if (res) {
         setIsLoggedIn(true);
-        setUpdateData(res);
       } else {
         setIsLoggedIn(false);
       }
