@@ -3,7 +3,7 @@ import { get } from "./baseApi";
 export default class Transfer {
   static #endpoint = "/api/v2/transfer";
 
-  static getTransferInfo = async () => {
+  static getInfo = async () => {
     return await get(this.#endpoint + "/info");
   };
 

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import Torrents from "../api/torrentsApi";
+import { updateArrayWithObject } from "../utils/helpers";
 
 const TorrentList = createContext();
 
@@ -7,6 +8,7 @@ const TorrentList = createContext();
  * @typedef {Object} TorrentListProvider
  * @property {import("../api/torrentsApi").TorrentInfo[]} torrentList
  * @property {Function} updateTorrentList
+ * @property {Function} deleteTorrents
  */
 
 /**
@@ -18,43 +20,30 @@ export function useTorrentList() {
 }
 
 export function TorrentListProvider({ children }) {
-  const [torrentList, setTorrentList] = useState();
+  const [torrentList, setTorrentList] = useState([]);
+
+  const deleteTorrents = (hashes) => {
+    let arrayCopy = [...torrentList];
+    hashes?.forEach((hash) => {
+      arrayCopy = arrayCopy.filter((item) => item.hash !== hash);
+    });
+    setTorrentList(arrayCopy);
+  };
 
   const updateTorrentList = (update) => {
     if (update) {
-      console.log(update);
-      setTorrentList(combineUpdatedTorrentLists(torrentList, update));
+      setTorrentList(updateArrayWithObject(torrentList, update));
       return;
     }
     Torrents.getTorrentsInfo().then((res) => {
       setTorrentList(res);
     });
   };
-
   return (
-    <TorrentList.Provider value={{ torrentList, updateTorrentList }}>
+    <TorrentList.Provider
+      value={{ torrentList, updateTorrentList, deleteTorrents }}
+    >
       {children}
     </TorrentList.Provider>
   );
-}
-/**
- *
- * @param {Object[]} mainList
- * @param {Object} updateList
- * @returns {Object[]}
- */
-function combineUpdatedTorrentLists(mainList, updateList) {
-  let torrentListCopy = [...mainList];
-  for (const key in updateList) {
-    if (Object.hasOwnProperty.call(updateList, key)) {
-      const objectItem = updateList[key];
-      for (let i = 0; i < torrentListCopy.length; i++) {
-        const arrayItem = torrentListCopy[i];
-        if (arrayItem.hash === key) {
-          torrentListCopy[i] = { ...torrentListCopy[i], ...objectItem };
-        }
-      }
-    }
-  }
-  return torrentListCopy;
 }

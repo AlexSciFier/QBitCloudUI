@@ -8,53 +8,59 @@ import {
 } from "react-router-dom";
 import Sync from "./api/syncApi";
 import "./App.css";
-import { UpdateDataProvider } from "./context/updateDataContext";
-import { TorrentListProvider } from "./context/torrentListContext";
+import { useUpdateData } from "./context/updateDataContext";
 import NotFoundLayout from "./layouts/404/NotFoundLayout";
 import Login from "./layouts/Login/Login";
 import MainLayout from "./layouts/Main/MainLayout";
+import AddTorrentLayout from "./layouts/AddTorrent/AddTorrentLayout";
+import SettingsLayout from "./layouts/Settings/SettingsLayout";
+import { useIsLoggedIn } from "./context/isLoggedInContext";
 
-function PrivateWrapper({ mainData }) {
-  return mainData ? <Outlet /> : <Navigate to="/login" />;
+function PrivateWrapper({ isLoggedIn }) {
+  return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
 }
 
 function App() {
-  const [mainData, setMainData] = useState();
+  const { isLoggedIn, setIsLoggedIn } = useIsLoggedIn();
   const [isLoading, setIsLoading] = useState(true);
+  const { setUpdateData } = useUpdateData();
 
   useEffect(() => {
     setIsLoading(true);
     Sync.getMainData().then((res) => {
-      setMainData(res);
+      if (res) {
+        setIsLoggedIn(true);
+        setUpdateData(res);
+      } else {
+        setIsLoggedIn(false);
+      }
       setIsLoading(false);
     });
   }, []);
 
   const routes = [
     { path: "/", element: <MainLayout /> },
+    { path: "/add", element: <AddTorrentLayout /> },
+    { path: "/settings", element: <SettingsLayout /> },
     { path: "*", element: <NotFoundLayout /> },
   ];
 
   if (isLoading) return <div></div>;
   else
     return (
-      <TorrentListProvider>
-        <UpdateDataProvider>
-          <Router>
-            <Routes>
-              {routes.map((route) => (
-                <Route
-                  key={route.path}
-                  element={<PrivateWrapper mainData={mainData} />}
-                >
-                  <Route path={route.path} element={route.element} />
-                </Route>
-              ))}
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </Router>
-        </UpdateDataProvider>
-      </TorrentListProvider>
+      <Router>
+        <Routes>
+          {routes.map((route) => (
+            <Route
+              key={route.path}
+              element={<PrivateWrapper isLoggedIn={isLoggedIn} />}
+            >
+              <Route path={route.path} element={route.element} />
+            </Route>
+          ))}
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </Router>
     );
 }
 

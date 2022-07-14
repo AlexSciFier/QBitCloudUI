@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Authentication from "../../api/authenticationApi";
 import { InputPassword, InputText } from "../../components/Inputs";
 import PrimaryButton from "../../components/PrimaryButton";
+import { useIsLoggedIn } from "../../context/isLoggedInContext";
 
 export default function Login() {
   const [login, setLogin] = useState("");
@@ -12,12 +13,18 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
+  const { isLoggedIn, setIsLoggedIn } = useIsLoggedIn();
+
+  useEffect(() => {
+    if (isLoggedIn) navigate("/");
+  }, [isLoggedIn]);
 
   var formSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     let loginRes = await Authentication.login(login, passowrd);
     if (loginRes.ok) {
+      setIsLoggedIn(true);
       navigate("/");
     } else {
       setIsLoading(false);

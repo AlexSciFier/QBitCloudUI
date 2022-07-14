@@ -41,6 +41,21 @@ export var postJSON = async (endpoint, data) => {
   });
 };
 
+export var postMultipart = async (endpoint, data) => {
+  let formData = new FormData();
+  for (const key in data) {
+    if (Object.hasOwnProperty.call(data, key)) {
+      const element = data[key];
+      formData.append(key, element);
+    }
+  }
+  return await fetch(new URL(endpoint, BASE_URL), {
+    method: "POST",
+    credentials: "include",
+    body: formData,
+  });
+};
+
 export var postURLEncoded = async (endpoint, data) => {
   var searchparams = new URLSearchParams(data);
   return await fetch(new URL(endpoint + "?" + searchparams, BASE_URL), {
