@@ -45,8 +45,8 @@ export const TORRENT_STATE = {
   },
   checkingUP: {
     description: "Torrent has finished downloading and is being checked",
-    icon: <CheckCircleIcon />,
-    color: "text-green",
+    icon: <RefreshIcon />,
+    color: "text-amber",
   },
   forcedUP: {
     description: "Torrent is forced to uploading and ignore queue limit",
@@ -86,7 +86,7 @@ export const TORRENT_STATE = {
   },
   checkingDL: {
     description: "Same as checkingUP, but torrent has NOT finished downloading",
-    icon: <ArrowCircleDownIcon />,
+    icon: <RefreshIcon />,
     color: "text-amber",
   },
   forcedDL: {
