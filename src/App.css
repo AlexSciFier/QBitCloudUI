@@ -1,0 +1,27 @@
+.loading-spin {
+  -webkit-animation: rotate-center 1s cubic-bezier(0.75, -0.2, 0.25, 1.2)
+    infinite reverse both;
+  animation: rotate-center 1s cubic-bezier(0.75, -0.2, 0.25, 1.2) infinite
+    reverse both;
+}
+
+@-webkit-keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

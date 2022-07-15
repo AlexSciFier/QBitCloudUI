@@ -15,6 +15,8 @@ import MainLayout from "./layouts/Main/MainLayout";
 import AddTorrentLayout from "./layouts/AddTorrent/AddTorrentLayout";
 import SettingsLayout from "./layouts/Settings/SettingsLayout";
 import { useIsLoggedIn } from "./context/isLoggedInContext";
+import AppLoader from "./layouts/AppLoader/AppLoader";
+import ErrorAppLoader from "./layouts/AppLoader/ErrorAppLoader";
 
 function PrivateWrapper({ isLoggedIn }) {
   return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
@@ -23,17 +25,25 @@ function PrivateWrapper({ isLoggedIn }) {
 function App() {
   const { isLoggedIn, setIsLoggedIn } = useIsLoggedIn();
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    Sync.getMainData().then((res) => {
-      if (res) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
-      setIsLoading(false);
-    });
+    setError(false);
+
+    Sync.getMainData()
+      .then((res) => {
+        if (res) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setError(true);
+      });
   }, []);
 
   const routes = [
@@ -43,7 +53,8 @@ function App() {
     { path: "*", element: <NotFoundLayout /> },
   ];
 
-  if (isLoading) return <div></div>;
+  if (isLoading) return <AppLoader />;
+  if (error) return <ErrorAppLoader />;
   else
     return (
       <Router>
