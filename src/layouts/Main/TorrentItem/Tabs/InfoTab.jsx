@@ -133,7 +133,9 @@ export default function InfoTab() {
           </TorrentInfoCard>
           <div className="md:col-span-4 sm:col-span-2 col-span-1">
             <TorrentInfoCard icon={<FolderIcon />} name="Save Path">
-              <div className="text-lg font-medium">{properties.save_path}</div>
+              <div className="text-lg font-medium truncate">
+                {properties.save_path}
+              </div>
             </TorrentInfoCard>
           </div>
         </div>

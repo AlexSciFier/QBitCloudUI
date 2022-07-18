@@ -31,7 +31,7 @@ export default function MainLayout() {
                     >
                       <LeftPanel />
                     </section>
-                    <section className="flex flex-col flex-1">
+                    <section className="flex flex-col flex-1 min-w-0">
                       <Navbar
                         onOpenMenuClick={() => setMenuOpened(!menuOpened)}
                       />

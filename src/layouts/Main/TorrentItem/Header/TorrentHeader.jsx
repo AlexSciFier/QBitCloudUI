@@ -13,7 +13,7 @@ export function TorrentHeader({ isOpen, onClick }) {
         <div className="flex-none w-5 h-5 text-neutral">
           {isOpen ? <ChevronDownIcon /> : <ChevronRightIcon />}
         </div>
-        <div className="flex overflow-hidden gap-1 align-middle">
+        <div className="flex flex-none gap-1 align-middle">
           <StateIcon state={torrentItem.state} />
           <div className="truncate">{torrentItem.name}</div>
         </div>
