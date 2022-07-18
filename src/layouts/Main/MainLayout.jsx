@@ -13,7 +13,7 @@ import { UpdateDataProvider } from "../../context/updateDataContext";
 
 export default function MainLayout() {
   const [menuOpened, setMenuOpened] = useState(!isMobile);
-  let leftMenuTranslate = menuOpened ? "" : `-translate-x-full w-0`;
+  let leftMenuTranslate = menuOpened ? "w-5/6" : `-translate-x-full w-0`;
   return (
     <GlobalInfoProvider>
       <TorrentListProvider>
@@ -22,22 +22,22 @@ export default function MainLayout() {
             <UpdateDataProvider>
               <TorrentFilterProvider>
                 <div className="h-screen flex flex-col">
-                  <section>
-                    <Navbar
-                      onOpenMenuClick={() => setMenuOpened(!menuOpened)}
-                    />
-                  </section>
-                  <section className="flex flex-1 overflow-hidden divide-x divide-light">
+                  <section className="flex flex-1 overflow-hidden divide-light">
                     <section
                       className={
-                        "xl:w-1/6 transition-transform overflow-hidden " +
+                        "xl:w-1/6 flex-none shadow-lg transition-transform overflow-hidden " +
                         leftMenuTranslate
                       }
                     >
                       <LeftPanel />
                     </section>
-                    <section className="flex-1 p-3 overflow-y-scroll">
-                      <TorrentList />
+                    <section className="flex flex-col flex-1">
+                      <Navbar
+                        onOpenMenuClick={() => setMenuOpened(!menuOpened)}
+                      />
+                      <section className="flex-1 p-3 overflow-y-scroll">
+                        <TorrentList />
+                      </section>
                     </section>
                   </section>
                 </div>
