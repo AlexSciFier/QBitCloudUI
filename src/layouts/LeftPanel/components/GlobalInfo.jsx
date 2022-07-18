@@ -11,6 +11,11 @@ import { toReadableSize, toReadableSpeed } from "../../../utils/helpers";
 import Chart from "react-apexcharts";
 
 export default function GlobalInfo() {
+  const { updateGlobalInfo } = useGlobalInfo();
+  useEffect(() => {
+    updateGlobalInfo();
+  }, []);
+
   return (
     <div>
       <ConnectionStatus />

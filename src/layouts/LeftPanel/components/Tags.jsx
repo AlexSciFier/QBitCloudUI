@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTags } from "../../../context/tagsContext";
 import { useTorrentFilter } from "../../../context/torrentFilterContext";
 
 export default function Tags() {
-  const { tags } = useTags();
+  const { tags, updateTags } = useTags();
   const [selected, setSelected] = useState([]);
   const { filter, setFilter } = useTorrentFilter();
+
+  useEffect(() => {
+    updateTags();
+  }, []);
 
   function selectTag(tag) {
     let arrCopy = [...selected];
@@ -37,7 +41,9 @@ export default function Tags() {
   );
 }
 function TagItem({ name, selected, onClick }) {
-  let selectedClass = selected ? "rounded bg-primary text-white" : "";
+  let selectedClass = selected
+    ? "rounded bg-gradient-to-r from-primary to-primaryLight text-white"
+    : "";
   return (
     <div
       className={
