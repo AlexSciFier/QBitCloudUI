@@ -1,12 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { debounce } from "lodash";
 
-export default function CustomTagInput({
-  name,
-  onFetchCallback,
-  onAddTagCallback,
-  delay = 500,
-}) {
+export default function CustomTagInput({ name, onFetchCallback, delay = 500 }) {
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -35,10 +30,6 @@ export default function CustomTagInput({
   function addTag(textInput) {
     let tagString = textInput.trim();
     setTags([...tags, tagString]);
-    let founded = suggestions.filter((tag) => tag.name === tagString);
-    if (founded.length === 0) {
-      onAddTagCallback(textInput);
-    }
     setTagInput("");
     setSuggestions([]);
   }
@@ -59,12 +50,12 @@ export default function CustomTagInput({
               key={idx}
             >
               {tag}
-              <button
+              <div
                 onClick={(e) => deleteTag(e, tag)}
                 className="ml-1 px-1 hover:bg-white/10"
               >
                 ×
-              </button>
+              </div>
             </div>
           ))}
         </div>
@@ -73,7 +64,7 @@ export default function CustomTagInput({
           type={"text"}
           list={"tags"}
           placeholder="Tags"
-          name={"tags"}
+          name={"tagInput"}
           value={tagInput}
           autoComplete="off"
           onChange={(e) => setTagInput(e.target.value)}
