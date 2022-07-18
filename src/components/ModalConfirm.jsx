@@ -1,4 +1,5 @@
 import React from "react";
+import PrimaryButton from "./PrimaryButton";
 
 export default function ModalConfirm({ title, children, onOk, onCancel }) {
   return (
@@ -13,12 +14,7 @@ export default function ModalConfirm({ title, children, onOk, onCancel }) {
           >
             Cancel
           </button>
-          <button
-            className="px-4 py-1 rounded hover:shadow-lg transition bg-primary text-white hover:bg-primaryLight hover:shadow-primary"
-            onClick={onOk}
-          >
-            OK
-          </button>
+          <PrimaryButton onClick={onOk}>OK</PrimaryButton>
         </div>
       </div>
     </div>

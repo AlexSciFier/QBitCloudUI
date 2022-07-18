@@ -6,7 +6,7 @@ export default function PrimaryButton({ children, onClick, isLoading }) {
     <button
       className={
         loadingClass +
-        "bg-primary text-white px-4 py-2 rounded shadow-md disabled:bg-neutral hover:bg-primaryLight hover:shadow-primaryLight"
+        "bg-gradient-to-r from-primary to-primaryLight text-white px-4 py-2 rounded disabled:bg-neutral hover:bg-primaryLight"
       }
       onClick={onClick}
     >

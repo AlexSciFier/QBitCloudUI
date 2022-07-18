@@ -16,7 +16,7 @@ function HamburgerMenu({ onOpenMenuClick }) {
 
 export default function Navbar({ onOpenMenuClick }) {
   return (
-    <div className="flex justify-between p-3 border-b border-light">
+    <div className="flex justify-between p-3">
       <div className="flex gap-3 items-center">
         {isMobile && <HamburgerMenu onOpenMenuClick={onOpenMenuClick} />}
         <div className="hidden md:block">qBitTorrent</div>

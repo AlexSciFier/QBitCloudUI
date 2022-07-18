@@ -1,12 +1,16 @@
 import { FolderIcon } from "@heroicons/react/outline";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCategories } from "../../../context/categoriesContext";
 import { useTorrentFilter } from "../../../context/torrentFilterContext";
 
 export default function Categories() {
-  const { categories } = useCategories();
+  const { categories, updateCategories } = useCategories();
   const [selected, setSelected] = useState();
   const { filter, setFilter } = useTorrentFilter();
+
+  useEffect(() => {
+    updateCategories();
+  }, []);
 
   function selectCategory(key) {
     if (key === selected) {
@@ -36,7 +40,9 @@ export default function Categories() {
 }
 
 function CategoryItem({ name, selected, onClick }) {
-  let selectedClass = selected ? "rounded bg-primary text-white" : "";
+  let selectedClass = selected
+    ? "rounded bg-gradient-to-r from-primary to-primaryLight text-white"
+    : "";
   return (
     <div
       className={
