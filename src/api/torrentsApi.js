@@ -196,7 +196,7 @@ export default class Torrents {
   static reannounce = async (hashes) => {
     return await get(this.#endpoint + "/reannounce", { hashes });
   };
-  static add = async (
+  static add = async ({
     urls,
     torrents,
     savepath = "",
@@ -209,9 +209,28 @@ export default class Torrents {
     rename = "",
     upLimit = 0,
     dlLimit = 0,
-    ratioLimit = 0
-  ) => {
-    return await postMultipart(this.#endpoint + "/add", {});
+    ratioLimit = 0,
+    firstLastPiecePrio = false,
+    sequentialDownload = false,
+  }) => {
+    let res = await postMultipart(this.#endpoint + "/add", {
+      urls,
+      torrents,
+      savepath,
+      cookie,
+      category,
+      tags,
+      skip_checking,
+      paused,
+      root_folder,
+      rename,
+      upLimit,
+      dlLimit,
+      ratioLimit,
+      firstLastPiecePrio,
+      sequentialDownload,
+    });
+    return await res.text();
   };
 
   static getAllCategories = async () => {

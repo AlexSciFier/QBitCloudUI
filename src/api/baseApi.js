@@ -42,13 +42,22 @@ export var postJSON = async (endpoint, data) => {
 };
 
 export var postMultipart = async (endpoint, data) => {
+  let filteredData = Object.entries(data).filter((entry) => {
+    if (entry[1]) return true;
+    return false;
+  });
   let formData = new FormData();
-  for (const key in data) {
-    if (Object.hasOwnProperty.call(data, key)) {
-      const element = data[key];
-      formData.append(key, element);
+  for (const element of filteredData) {
+    if (typeof element[1] === "object") {
+      for (let i = 0; i < element[1].length; i++) {
+        const item = element[1][i];
+        formData.append(element[0], item);
+      }
+    } else {
+      formData.append(element[0], element[1]);
     }
   }
+
   return await fetch(new URL(endpoint, BASE_URL), {
     method: "POST",
     credentials: "include",

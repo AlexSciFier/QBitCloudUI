@@ -1,12 +1,17 @@
 import { CheckIcon } from "@heroicons/react/outline";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Torrents from "../../api/torrentsApi";
 import CustomSelect from "../../components/CustomSelect";
 import CustomTagInput from "../../components/CustomTagInput";
+import PrimaryButton from "../../components/PrimaryButton";
 
 export default function AddTorrentLayout() {
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     Torrents.getAllCategories().then((res) => {
@@ -21,9 +26,32 @@ export default function AddTorrentLayout() {
     Torrents.getAllTags().then((res) => setTags(res));
   }, []);
 
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    setIsLoading(true);
+    let form = e.target;
+    Torrents.add({
+      torrents: form.torrents.files,
+      urls: form.urls.value,
+      category: form.category.value,
+      paused: form.paused.cheched,
+      savepath: form.savepath.value,
+      tags: form.tags.value,
+      skip_checking: form.skip_checking.checked,
+      firstLastPiecePrio: form.firstLastPiecePrio.cheched,
+      sequentialDownload: form.sequentialDownload.cheched,
+    }).then((res) => {
+      setIsLoading(false);
+      if (res === "Ok.") navigate("/");
+    });
+  }
+
   return (
-    <div className="w-screen h-screen overflow-hidden flex justify-center items-center">
-      <form className="lg:w-2/4 w-full flex flex-col gap-1 rounded-xl shadow-xl border border-light p-4">
+    <div className="lg:w-screen lg:h-screen overflow-y-auto flex justify-center items-center">
+      <form
+        className="lg:w-2/4 w-full lg:h-fit h-full flex flex-col gap-3 lg:rounded-xl lg:shadow-xl lg:border border-light p-4"
+        onSubmit={handleFormSubmit}
+      >
         <TextAreaInput
           title="Urls"
           name="urls"
@@ -34,13 +62,6 @@ export default function AddTorrentLayout() {
           name="torrents"
           description="Load .torrent file"
         />
-        <TextInput
-          title="Save path"
-          name="savepath"
-          description="Download folder"
-        />
-        <SelectInput title="Category" name="category" items={categories} />
-        <TagInput title="Tags" name="tags" tagList={tags} />
         <div className="grid lg:grid-cols-2 grid-cols-1">
           <CheckInput
             title="Add torrents in the paused state"
@@ -56,14 +77,23 @@ export default function AddTorrentLayout() {
             name={"firstLastPiecePrio"}
           />
         </div>
+
+        <SelectInput title="Category" name="category" items={categories} />
+        <TagInput title="Tags" name="tags" tagList={tags} />
+        <TextInput
+          title="Save path"
+          name="savepath"
+          description="Download folder"
+        />
+        <PrimaryButton isLoading={isLoading}>Add torrent</PrimaryButton>
       </form>
     </div>
   );
 }
 
+// TODO
 // cookie             optional	string	Cookie sent to download the .torrent file
 // root_folder        optional	string	Create the root folder. Possible values are true, false, unset (default)
-// rename             optional	string	Rename torrent
 // upLimit            optional	integer	Set torrent upload speed limit. Unit in bytes/second
 // dlLimit            optional	integer	Set torrent download speed limit. Unit in bytes/second
 // ratioLimit         optional 	float	  Set torrent share ratio limit
