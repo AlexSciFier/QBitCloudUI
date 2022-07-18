@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InfoTab from "./Tabs/InfoTab";
 import SpeedTab from "./Tabs/SpeedTab";
+import TrackersTab from "./Tabs/TrackersTab";
 
 export function TabView() {
   const tabs = [
@@ -10,7 +11,7 @@ export function TabView() {
     },
     {
       header: "Trackers",
-      body: <div>Trackers</div>,
+      body: <TrackersTab />,
     },
     {
       header: "Peers",
@@ -29,7 +30,7 @@ export function TabView() {
   const [curentTab, setCurentTab] = useState(0);
 
   return (
-    <div className="w-full px-3">
+    <div className="px-3">
       <ul className="flex w-full text-lg overflow-x-auto">
         {tabs.map((tab, idx) => (
           <TabHeader

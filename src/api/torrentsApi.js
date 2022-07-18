@@ -260,13 +260,11 @@ export default class Torrents {
 // setLocation
 // rename
 // setCategory
-//
 // createCategory
 // editCategory
 // removeCategories
 // addTags
 // removeTags
-//
 // createTags
 // deleteTags
 // setAutoManagement
