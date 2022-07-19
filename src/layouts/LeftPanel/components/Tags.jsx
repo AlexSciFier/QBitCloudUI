@@ -28,9 +28,9 @@ export default function Tags() {
     <div>
       <div className="text-lg">Tags</div>
       <div className="flex flex-col gap-1">
-        {tags?.map((tag) => (
+        {tags?.map((tag, idx) => (
           <TagItem
-            key={tag}
+            key={tag + idx}
             name={tag}
             selected={selected.includes(tag)}
             onClick={() => selectTag(tag)}

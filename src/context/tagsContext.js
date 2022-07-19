@@ -1,3 +1,4 @@
+import { uniq } from "lodash";
 import React, { createContext, useContext, useState } from "react";
 import Torrents from "../api/torrentsApi";
 
@@ -31,7 +32,7 @@ export function TagsProvider({ children }) {
 
   const updateTags = (update) => {
     if (update) {
-      setTags([...tags, ...update]);
+      setTags(uniq([...tags, ...update]));
       return;
     }
     Torrents.getAllTags().then((res) => {
