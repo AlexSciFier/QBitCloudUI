@@ -98,6 +98,18 @@ export default function PeersTab() {
       ],
     }));
 
+  const cols = [
+    "Country",
+    "IP",
+    "Port",
+    "Connection",
+    "Flags",
+    "Client",
+    "Progress",
+    "Download speed",
+    "Upload speed",
+  ];
+
   function getFlagEmoji(countryCode) {
     const codePoints = countryCode
       .toUpperCase()
@@ -109,7 +121,7 @@ export default function PeersTab() {
   return (
     <div className="">
       {rows.length > 0 ? (
-        <Table rows={rows} />
+        <Table rows={rows} columns={cols} />
       ) : (
         <div className="border border-light rounded-lg px-3 text-center">
           No peers
