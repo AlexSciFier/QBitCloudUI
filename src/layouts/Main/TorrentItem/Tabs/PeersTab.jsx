@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sync from "../../../../api/syncApi";
 import { useTorrentItem } from "../../../../context/torrentItemContext";
-import Table from "../../../LeftPanel/components/Table";
+import Table from "../../../../components/Table";
 import { toReadableSpeed } from "../../../../utils/helpers";
 
 export default function PeersTab() {
@@ -99,15 +99,15 @@ export default function PeersTab() {
     }));
 
   const cols = [
-    "Country",
-    "IP",
-    "Port",
-    "Connection",
-    "Flags",
-    "Client",
-    "Progress",
-    "Download speed",
-    "Upload speed",
+    { name: "Country" },
+    { name: "IP" },
+    { name: "Port" },
+    { name: "Connection" },
+    { name: "Flags" },
+    { name: "Client" },
+    { name: "Progress" },
+    { name: "Download speed" },
+    { name: "Upload speed" },
   ];
 
   function getFlagEmoji(countryCode) {

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ContentTab from "./Tabs/ContentTab";
 import InfoTab from "./Tabs/InfoTab";
 import PeersTab from "./Tabs/PeersTab";
 import SpeedTab from "./Tabs/SpeedTab";
@@ -20,7 +21,7 @@ export function TabView() {
     },
     {
       header: "Content",
-      body: <div>Content</div>,
+      body: <ContentTab />,
     },
     {
       header: "Speed",

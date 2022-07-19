@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Torrents from "../../../../api/torrentsApi";
 import { useTorrentItem } from "../../../../context/torrentItemContext";
-import { useUpdateData } from "../../../../context/updateDataContext";
-import Table from "../../../LeftPanel/components/Table";
+import Table from "../../../../components/Table";
 
 export default function TrackersTab() {
   const [trackers, setTrackers] = useState([]);
@@ -13,17 +12,6 @@ export default function TrackersTab() {
       setTrackers(res);
     });
   }, []);
-
-  const trackerNameMap = {
-    url: "URL",
-    tier: "Tier",
-    status: "Status",
-    num_seeds: "Seeds",
-    num_peers: "Peers",
-    num_leeches: "Leeches",
-    num_downloaded: "Downloaded",
-    msg: "Message",
-  };
 
   const trackerStatusMap = {
     0: "Diasbled",
@@ -53,10 +41,16 @@ export default function TrackersTab() {
       };
     }) || [];
 
-  const cols =
-    Object.keys(trackers?.[0] || {})
-      ?.map((key) => trackerNameMap[key])
-      ?.reverse() || [];
+  const cols = [
+    { name: "URL" },
+    { name: "Tier" },
+    { name: "Status" },
+    { name: "Seeds" },
+    { name: "Peers" },
+    { name: "Leeches" },
+    { name: "Downloaded" },
+    { name: "Message" },
+  ];
 
   return (
     <div>
