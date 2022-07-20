@@ -10,8 +10,12 @@ export function TorrentHeader({ isOpen, onClick }) {
   return (
     <div className="flex flex-col gap-1 hover:cursor-pointer" onClick={onClick}>
       <div className="flex justify-between gap-1">
-        <div className="flex-none w-5 h-5 text-neutral">
-          {isOpen ? <ChevronDownIcon /> : <ChevronRightIcon />}
+        <div
+          className={`flex-none w-5 h-5 text-neutral transition-transform ${
+            isOpen ? "rotate-90" : ""
+          }`}
+        >
+          <ChevronRightIcon />
         </div>
         <div className="flex flex-none gap-1 align-middle">
           <StateIcon state={torrentItem.state} />
