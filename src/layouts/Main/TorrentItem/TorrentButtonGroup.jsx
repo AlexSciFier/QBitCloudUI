@@ -1,13 +1,14 @@
-import { PauseIcon, PlayIcon, XCircleIcon } from "@heroicons/react/outline";
-import {
-  PauseIcon as PauseIconSolid,
-  PlayIcon as PlayIconSolid,
-  XCircleIcon as XCircleIconSolid,
-} from "@heroicons/react/solid";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Torrents from "../../../api/torrentsApi";
 import ModalConfirm from "../../../components/ModalConfirm";
 import { useTorrentItem } from "../../../context/torrentItemContext";
+import {
+  BsPlayFill,
+  BsPauseFill,
+  BsTrashFill,
+  BsPencilFill,
+} from "react-icons/bs";
 
 export function TorrentButtonGroup() {
   const { torrentItem } = useTorrentItem();
@@ -40,7 +41,7 @@ export function TorrentButtonGroup() {
   }
 
   return (
-    <div className="flex gap-3">
+    <div className="flex justify-between">
       {showModal && (
         <ModalConfirm
           title={"Confirm delete"}
@@ -59,27 +60,32 @@ export function TorrentButtonGroup() {
           </div>
         </ModalConfirm>
       )}
-      <button
-        className="text-primary relative group"
-        onClick={() => resumeTorrent()}
-      >
-        <PlayIcon className="w-8 h-8 group-hover:opacity-0 transition-opacity" />
-        <PlayIconSolid className="w-8 h-8 absolute top-0 opacity-0 group-hover:opacity-100 transition-opacity" />
-      </button>
-      <button
-        className="text-primary relative group"
-        onClick={() => pauseTorrent()}
-      >
-        <PauseIcon className="w-8 h-8 group-hover:opacity-0 transition-opacity" />
-        <PauseIconSolid className="w-8 h-8 absolute top-0 opacity-0 group-hover:opacity-100 transition-opacity" />
-      </button>
-      <button
-        className="text-red relative group"
-        onClick={() => deleteTorrent()}
-      >
-        <XCircleIcon className="w-8 h-8 group-hover:opacity-0 transition-opacity" />
-        <XCircleIconSolid className="w-8 h-8 absolute top-0 opacity-0 group-hover:opacity-100 transition-opacity" />
-      </button>
+      <div className="flex gap-3">
+        <button
+          className="bg-gradient-to-r from-primary to-primaryLight transition hover:shadow-md hover:shadow-primary/50 text-white rounded flex justify-center items-center h-8 w-8 p-1"
+          onClick={() => resumeTorrent()}
+        >
+          <BsPlayFill />
+        </button>
+        <button
+          className="bg-gradient-to-r from-primary to-primaryLight transition hover:shadow-md hover:shadow-primary/50 text-white rounded flex justify-center items-center h-8 w-8 p-1"
+          onClick={() => pauseTorrent()}
+        >
+          <BsPauseFill />
+        </button>
+        {/* <Link
+          to={`/edit/${torrentItem.hash}`}
+          className="bg-gradient-to-r from-primary to-primaryLight transition hover:shadow-md hover:shadow-primary/50 text-white rounded flex justify-center items-center h-8 w-8 p-1"
+        >
+          <BsPencilFill />
+        </Link> */}
+        <button
+          className="bg-gradient-to-r from-red to-redLight transition hover:shadow-md hover:shadow-red/50 text-white rounded flex justify-center items-center h-8 w-8 p-1"
+          onClick={() => deleteTorrent()}
+        >
+          <BsTrashFill />
+        </button>
+      </div>
     </div>
   );
 }
