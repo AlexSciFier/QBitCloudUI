@@ -47,10 +47,10 @@ export default function AddTorrentLayout() {
   }
 
   return (
-    <div className="lg:w-screen lg:h-screen overflow-y-auto flex justify-center items-center">
-      <div className="lg:w-2/4 w-full h-full flex flex-col gap-3 lg:shadow-xl lg:border border-light p-4">
+    <div className="min-h-screen flex flex-col justify-center items-center">
+      <div className="lg:w-2/4 flex flex-col flex-1 lg:shadow-xl lg:border border-light p-4">
         <HeaderAddTorrent />
-        <form onSubmit={handleFormSubmit}>
+        <form onSubmit={handleFormSubmit} className="mt-6">
           <TextAreaInput
             title="Urls"
             name="urls"
@@ -94,13 +94,14 @@ export default function AddTorrentLayout() {
 function HeaderAddTorrent() {
   const navigate = useNavigate();
   return (
-    <div className="flex">
+    <div className="flex gap-3 items-center">
       <button
         onClick={() => navigate(-1)}
         className="w-8 h-8 p-1 hover:bg-light rounded-full"
       >
         <ArrowLeftIcon />
       </button>
+      <div className="text-xl">Add torrent</div>
     </div>
   );
 }
