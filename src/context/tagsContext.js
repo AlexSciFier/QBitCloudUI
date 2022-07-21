@@ -1,6 +1,7 @@
 import { uniq } from "lodash";
 import React, { createContext, useContext, useState } from "react";
 import Torrents from "../api/torrentsApi";
+import { useIsLoggedIn } from "./isLoggedInContext";
 
 const Tags = createContext();
 
@@ -21,6 +22,7 @@ export function useTags() {
 
 export function TagsProvider({ children }) {
   const [tags, setTags] = useState([]);
+  const { setIsLoggedIn } = useIsLoggedIn();
 
   const deleteTags = (hashes) => {
     let tagsCopy = [...tags];
@@ -36,6 +38,7 @@ export function TagsProvider({ children }) {
       return;
     }
     Torrents.getAllTags().then((res) => {
+      if (res === undefined) setIsLoggedIn(false);
       setTags(res);
     });
   };

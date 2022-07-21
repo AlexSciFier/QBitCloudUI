@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import Torrents from "../api/torrentsApi";
 import { updateArrayWithObject } from "../utils/helpers";
+import { useIsLoggedIn } from "./isLoggedInContext";
 
 const TorrentList = createContext();
 
@@ -21,6 +22,7 @@ export function useTorrentList() {
 
 export function TorrentListProvider({ children }) {
   const [torrentList, setTorrentList] = useState([]);
+  const { setIsLoggedIn } = useIsLoggedIn();
 
   const deleteTorrents = (hashes) => {
     let arrayCopy = [...torrentList];
@@ -36,6 +38,7 @@ export function TorrentListProvider({ children }) {
       return;
     }
     Torrents.getTorrentsInfo().then((res) => {
+      if (res === undefined) setIsLoggedIn(false);
       setTorrentList(res);
     });
   };

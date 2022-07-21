@@ -8,6 +8,7 @@ import React, {
 import Sync from "../api/syncApi";
 import { useCategories } from "./categoriesContext";
 import { useGlobalInfo } from "./globalInfoContext";
+import { useIsLoggedIn } from "./isLoggedInContext";
 import { useTags } from "./tagsContext";
 import { useTorrentList } from "./torrentListContext";
 
@@ -37,6 +38,7 @@ export function UpdateDataProvider({ children }) {
   const { updateCategories, deleteCategories } = useCategories();
   const { updateTags, deleteTags } = useTags();
   const { updateGlobalInfo } = useGlobalInfo();
+  const { setIsLoggedIn } = useIsLoggedIn();
 
   useEffect(() => {
     return () => {
@@ -70,6 +72,9 @@ export function UpdateDataProvider({ children }) {
 
   const manualUpdateData = async () => {
     let res = await Sync.getMainData();
+    if (res === undefined) {
+      setIsLoggedIn(false);
+    }
     setUpdateData(res);
   };
 

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import Torrents from "../api/torrentsApi";
+import { useIsLoggedIn } from "./isLoggedInContext";
 
 const Categories = createContext();
 
@@ -29,7 +30,7 @@ export function useCategories() {
 
 export function CategoriesProvider({ children }) {
   const [categories, setCategories] = useState({});
-
+  const { setIsLoggedIn } = useIsLoggedIn();
   const deleteCategories = (hashes) => {
     let objCopy = { ...categories };
     hashes.forEach((item) => {
@@ -44,6 +45,7 @@ export function CategoriesProvider({ children }) {
       return;
     }
     Torrents.getAllCategories().then((res) => {
+      if (res === undefined) setIsLoggedIn(false);
       setCategories(res);
     });
   };

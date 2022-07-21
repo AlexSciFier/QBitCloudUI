@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import Transfer from "../api/transferApi";
+import { useIsLoggedIn } from "./isLoggedInContext";
 
 const GlobalInfo = createContext();
 
@@ -34,6 +35,7 @@ export function useGlobalInfo() {
 
 export function GlobalInfoProvider({ children }) {
   const [globalInfo, setGlobalInfo] = useState();
+  const { setIsLoggedIn } = useIsLoggedIn();
 
   const updateGlobalInfo = (update) => {
     if (update) {
@@ -41,6 +43,7 @@ export function GlobalInfoProvider({ children }) {
       return;
     }
     Transfer.getInfo().then((res) => {
+      if (res === undefined) setIsLoggedIn(false);
       setGlobalInfo(res);
     });
   };
