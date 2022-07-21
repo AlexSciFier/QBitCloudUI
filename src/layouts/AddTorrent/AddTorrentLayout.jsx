@@ -50,7 +50,7 @@ export default function AddTorrentLayout() {
     <div className="min-h-screen flex flex-col justify-center items-center">
       <div className="lg:w-2/4 flex flex-col flex-1 lg:shadow-xl lg:border border-light p-4">
         <HeaderAddTorrent />
-        <form onSubmit={handleFormSubmit} className="mt-6">
+        <form onSubmit={handleFormSubmit} className="flex flex-col gap-3 mt-6">
           <TextAreaInput
             title="Urls"
             name="urls"
