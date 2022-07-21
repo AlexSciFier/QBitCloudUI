@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Torrents from "../../api/torrentsApi";
 import CustomSelect from "../../components/CustomSelect";
 import CustomTagInput from "../../components/CustomTagInput";
+import PageBody from "../../components/PageBody";
 import PrimaryButton from "../../components/PrimaryButton";
 
 export default function AddTorrentLayout() {
@@ -47,62 +48,44 @@ export default function AddTorrentLayout() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center">
-      <div className="lg:w-2/4 flex flex-col flex-1 lg:shadow-xl lg:border border-light p-4">
-        <HeaderAddTorrent />
-        <form onSubmit={handleFormSubmit} className="flex flex-col gap-3 mt-6">
-          <TextAreaInput
-            title="Urls"
-            name="urls"
-            description="URLs separated with newlines"
+    <PageBody title={"Add torrent"}>
+      <form onSubmit={handleFormSubmit} className="flex flex-col gap-3 mt-6">
+        <TextAreaInput
+          title="Urls"
+          name="urls"
+          description="URLs separated with newlines"
+        />
+        <FileInput
+          title="Torrent file"
+          name="torrents"
+          description="Load .torrent file"
+        />
+        <div className="grid lg:grid-cols-2 grid-cols-1">
+          <CheckInput
+            title="Add torrents in the paused state"
+            name={"paused"}
           />
-          <FileInput
-            title="Torrent file"
-            name="torrents"
-            description="Load .torrent file"
+          <CheckInput title="Skip hash checking" name={"skip_checking"} />
+          <CheckInput
+            title="Enable sequential download"
+            name={"sequentialDownload"}
           />
-          <div className="grid lg:grid-cols-2 grid-cols-1">
-            <CheckInput
-              title="Add torrents in the paused state"
-              name={"paused"}
-            />
-            <CheckInput title="Skip hash checking" name={"skip_checking"} />
-            <CheckInput
-              title="Enable sequential download"
-              name={"sequentialDownload"}
-            />
-            <CheckInput
-              title="Prioritize download first last piece"
-              name={"firstLastPiecePrio"}
-            />
-          </div>
+          <CheckInput
+            title="Prioritize download first last piece"
+            name={"firstLastPiecePrio"}
+          />
+        </div>
 
-          <SelectInput title="Category" name="category" items={categories} />
-          <TagInput title="Tags" name="tags" tagList={tags} />
-          <TextInput
-            title="Save path"
-            name="savepath"
-            description="Download folder"
-          />
-          <PrimaryButton isLoading={isLoading}>Add torrent</PrimaryButton>
-        </form>
-      </div>
-    </div>
-  );
-}
-
-function HeaderAddTorrent() {
-  const navigate = useNavigate();
-  return (
-    <div className="flex gap-3 items-center">
-      <button
-        onClick={() => navigate(-1)}
-        className="w-8 h-8 p-1 hover:bg-light rounded-full"
-      >
-        <ArrowLeftIcon />
-      </button>
-      <div className="text-xl">Add torrent</div>
-    </div>
+        <SelectInput title="Category" name="category" items={categories} />
+        <TagInput title="Tags" name="tags" tagList={tags} />
+        <TextInput
+          title="Save path"
+          name="savepath"
+          description="Download folder"
+        />
+        <PrimaryButton isLoading={isLoading}>Add torrent</PrimaryButton>
+      </form>
+    </PageBody>
   );
 }
 
