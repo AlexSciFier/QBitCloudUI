@@ -7,7 +7,7 @@ export default function PageBody({ children, title }) {
     <div className="min-h-screen flex flex-col justify-center items-center">
       <div className="lg:w-2/4 flex flex-col flex-1 lg:shadow-xl lg:border border-light p-4">
         <PageHeader title={title} />
-        {children}
+        <div className="mt-6">{children}</div>
       </div>
     </div>
   );

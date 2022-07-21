@@ -49,7 +49,7 @@ export default function AddTorrentLayout() {
 
   return (
     <PageBody title={"Add torrent"}>
-      <form onSubmit={handleFormSubmit} className="flex flex-col gap-3 mt-6">
+      <form onSubmit={handleFormSubmit} className="flex flex-col gap-3">
         <TextAreaInput
           title="Urls"
           name="urls"
