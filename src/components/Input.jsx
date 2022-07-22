@@ -1,7 +1,18 @@
 import React from "react";
 import { BaseInputWrapper } from "./BaseInputWrapper";
 
-export function Input({ type, title, name, description, value, placeholder }) {
+export function Input({
+  type,
+  title,
+  name,
+  description,
+  value,
+  placeholder,
+  onChange,
+}) {
+  function onChangeHandler(e) {
+    if (onChange) onChange(e);
+  }
   return (
     <BaseInputWrapper title={title} description={description}>
       <input
@@ -10,7 +21,8 @@ export function Input({ type, title, name, description, value, placeholder }) {
         name={name}
         value={value}
         placeholder={placeholder}
-        className="border border-light rounded px-2 py-1"
+        className="border border-light rounded px-2 py-1 outline-none focus:ring focus:ring-primary"
+        onChange={onChangeHandler}
       ></input>
     </BaseInputWrapper>
   );

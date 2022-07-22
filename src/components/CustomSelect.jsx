@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { SelectorIcon } from "@heroicons/react/outline";
 
-export default function CustomSelect({ items, name }) {
-  const [selected, setSelected] = useState(items[0] || { name: "", value: "" });
+export default function CustomSelect({ items, name, selectedIndex = 0 }) {
+  const [selected, setSelected] = useState(
+    items[selectedIndex] || { name: "", value: "" }
+  );
   const [isItemsShow, setIsItemsShow] = useState(false);
 
   const ref = useRef(null);
@@ -22,8 +24,8 @@ export default function CustomSelect({ items, name }) {
   }, [isItemsShow]);
 
   useEffect(() => {
-    setSelected(items[0] || { name: "", value: "" });
-  }, [items]);
+    setSelected(items[selectedIndex || 0] || { name: "", value: "" });
+  }, [items, selectedIndex]);
 
   function onItemClick(item) {
     setIsItemsShow(false);
