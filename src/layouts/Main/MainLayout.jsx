@@ -37,7 +37,7 @@ export default function MainLayout() {
                         onOpenMenuClick={() => setMenuOpened(!menuOpened)}
                       />
                       <TorrentFilter />
-                      <section className="flex-1 p-3 overflow-y-scroll">
+                      <section className="flex-1 p-3 overflow-y-auto">
                         <TorrentList />
                       </section>
                     </section>
