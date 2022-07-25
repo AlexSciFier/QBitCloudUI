@@ -19,7 +19,6 @@ export default function Navbar({ onOpenMenuClick }) {
     <div className="flex justify-between p-3">
       <div className="flex gap-3 items-center">
         {isMobile && <HamburgerMenu onOpenMenuClick={onOpenMenuClick} />}
-        <div className="hidden md:block">qBitTorrent</div>
       </div>
       <div className="flex gap-3">
         <LinkButton to={"/add"} title={"Add torrent"} icon={<PlusIcon />} />
