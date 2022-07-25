@@ -1,8 +1,11 @@
 import {
   ChartPieIcon,
   ClockIcon,
+  DocumentIcon,
   DownloadIcon,
   FolderIcon,
+  HashtagIcon,
+  KeyIcon,
   LinkIcon,
   TrendingDownIcon,
   TrendingUpIcon,
@@ -17,6 +20,7 @@ import {
   toReadableSpeed,
   toReadableTime,
 } from "../../../../utils/helpers";
+import { TORRENT_STATE } from "../../../../utils/torrentStates";
 
 export default function InfoTab() {
   let { torrentItem } = useTorrentItem();
@@ -107,6 +111,7 @@ export default function InfoTab() {
               {toReadableSize(properties.total_size)}
             </div>
           </TorrentInfoCard>
+
           <TorrentInfoCard icon={<ClockIcon />} name="Added">
             <div className="text-lg font-medium">
               {new Date(properties.addition_date * 1000).toLocaleDateString()}
@@ -115,6 +120,7 @@ export default function InfoTab() {
               {new Date(properties.addition_date * 1000).toLocaleTimeString()}
             </div>
           </TorrentInfoCard>
+
           <TorrentInfoCard icon={<ClockIcon />} name="Completed">
             <div className="text-lg font-medium">
               {new Date(properties.completion_date * 1000).toLocaleDateString()}
@@ -123,6 +129,7 @@ export default function InfoTab() {
               {new Date(properties.completion_date * 1000).toLocaleTimeString()}
             </div>
           </TorrentInfoCard>
+
           <TorrentInfoCard icon={<ViewGridIcon />} name="Pieces">
             <div className="text-lg font-medium">
               {properties.pieces_num} x {toReadableSize(properties.piece_size)}
@@ -131,10 +138,58 @@ export default function InfoTab() {
               have {properties.pieces_have}
             </div>
           </TorrentInfoCard>
+
           <div className="md:col-span-4 sm:col-span-2 col-span-1">
+            <TorrentInfoCard name="Name" icon={<DocumentIcon />}>
+              <div className="text-lg font-medium break-all">
+                {torrentItem.name}
+              </div>
+            </TorrentInfoCard>
+          </div>
+
+          <div className="md:col-span-4 sm:col-span-2 col-span-1">
+            <TorrentInfoCard
+              name="State"
+              icon={TORRENT_STATE[torrentItem.state].icon}
+            >
+              <div className="text-lg font-medium break-all">
+                {TORRENT_STATE[torrentItem.state].description}
+              </div>
+            </TorrentInfoCard>
+          </div>
+
+          <div className="md:col-span-4 sm:col-span-2 col-span-1">
+            <TorrentInfoCard name="Magnet URL" icon={<LinkIcon />}>
+              <div className="text-lg font-medium break-all">
+                {torrentItem.magnet_uri}
+              </div>
+            </TorrentInfoCard>
+          </div>
+
+          <div className="md:col-span-2 sm:col-span-2 col-span-1">
+            <TorrentInfoCard name="Category" icon={<FolderIcon />}>
+              <div className="text-lg font-medium">{torrentItem.category}</div>
+            </TorrentInfoCard>
+          </div>
+
+          <div className="md:col-span-2 sm:col-span-2 col-span-1">
+            <TorrentInfoCard name="Tags" icon={<HashtagIcon />}>
+              <div className="text-lg font-medium">{torrentItem.tags}</div>
+            </TorrentInfoCard>
+          </div>
+
+          <div className="md:col-span-2 sm:col-span-2 col-span-1">
             <TorrentInfoCard icon={<FolderIcon />} name="Save Path">
               <div className="text-lg font-medium truncate">
                 {properties.save_path}
+              </div>
+            </TorrentInfoCard>
+          </div>
+
+          <div className="md:col-span-2 sm:col-span-2 col-span-1">
+            <TorrentInfoCard name="Hash" icon={<KeyIcon />}>
+              <div className="text-lg font-medium break-all">
+                {torrentItem.hash}
               </div>
             </TorrentInfoCard>
           </div>
@@ -145,7 +200,7 @@ export default function InfoTab() {
 }
 function TorrentInfoCard({ icon, name, children }) {
   return (
-    <div className="flex flex-col gap-1 bg-light/50 rounded-lg px-4 py-2">
+    <div className="h-full flex flex-col gap-1 bg-light/50 rounded-lg px-4 py-2">
       <div className="flex-1">{children}</div>
       <div className="flex items-center gap-1">
         <div className="w-5 h-5 text-primary flex-none">{icon}</div>
