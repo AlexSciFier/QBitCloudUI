@@ -10,6 +10,7 @@ import { TorrentListProvider } from "../../context/torrentListContext";
 import { CategoriesProvider } from "../../context/categoriesContext";
 import { TagsProvider } from "../../context/tagsContext";
 import { UpdateDataProvider } from "../../context/updateDataContext";
+import TorrentFilter from "./TorrentFilter";
 
 export default function MainLayout() {
   const [menuOpened, setMenuOpened] = useState(!isMobile);
@@ -31,10 +32,11 @@ export default function MainLayout() {
                     >
                       <LeftPanel />
                     </section>
-                    <section className="flex flex-col flex-1 min-w-0">
+                    <section className="flex flex-col gap-1 flex-1 min-w-0">
                       <Navbar
                         onOpenMenuClick={() => setMenuOpened(!menuOpened)}
                       />
+                      <TorrentFilter />
                       <section className="flex-1 p-3 overflow-y-scroll">
                         <TorrentList />
                       </section>

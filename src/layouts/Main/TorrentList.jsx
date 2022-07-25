@@ -36,6 +36,18 @@ export default function TorrentList() {
           .some((r) => filter.tags.indexOf(r) >= 0);
         return found > 0;
       });
+    if (filter.states !== "") {
+      torrentListCopy = torrentListCopy.filter((item) => {
+        return filter.states.split(",").includes(item.state);
+      });
+    }
+    if (filter.search !== "") {
+      torrentListCopy = torrentListCopy.filter((item) => {
+        return item.name
+          .toLocaleLowerCase()
+          .includes(filter.search.toLocaleLowerCase());
+      });
+    }
     setFiltered(torrentListCopy);
   }, [torrentList, filter]);
 

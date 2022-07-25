@@ -48,7 +48,7 @@ export default function CustomSelect({
       ></input>
       <div
         onClick={() => setIsItemsShow(!isItemsShow)}
-        className="flex h-10 gap-1 items-center border border-light rounded px-2 py-1 hover:cursor-pointer select-none"
+        className="flex gap-1 items-center border border-light rounded px-2 py-1 hover:cursor-pointer select-none"
       >
         <SelectorIcon className="w-5 h-5" />
         {selected.name}
@@ -58,7 +58,7 @@ export default function CustomSelect({
           {items.map((item) => (
             <div
               onClick={() => onItemClick(item)}
-              className="px-2 py-1 h-8 select-none hover:cursor-pointer hover:bg-primary hover:text-white"
+              className="px-2 py-1 h-8 select-none hover:cursor-pointer group hover:bg-primary hover:text-white"
               key={item.value}
             >
               {item.name}
