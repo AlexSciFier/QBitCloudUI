@@ -33,6 +33,7 @@ export default function SettingsLayout() {
    * @type {[import("../../api/applicationApi").preferences, React.Dispatch<React.SetStateAction<import("../../api/applicationApi").preferences>>]}
    */
   const [changed, setChanged] = useState({});
+  const [isSaving, setIsSaving] = useState(false);
 
   async function fetchSettings() {
     let res = await Application.getPreferences();
@@ -112,14 +113,17 @@ export default function SettingsLayout() {
       </div>
       {isEmpty(changed) === false && (
         <UnsavedChangesPopup
+          isSaving={isSaving}
           onUndo={() => {
             setChanged({});
             fetchSettings();
           }}
           onSave={() => {
+            setIsSaving(true);
             Application.setPreferences(changed).then((res) => {
               setChanged({});
               fetchSettings();
+              setIsSaving(false);
             });
           }}
         />
@@ -127,13 +131,16 @@ export default function SettingsLayout() {
     </PageBody>
   );
 }
-function UnsavedChangesPopup({ onUndo, onSave }) {
+
+function UnsavedChangesPopup({ onUndo, onSave, isSaving }) {
   return (
     <div className="sticky bottom-3 flex justify-between items-center bg-white py-1 px-3 rounded-md shadow-md">
       <div>Unsaved changes</div>
       <div className="flex gap-3">
         <SecondaryButton onClick={onUndo}>Undo</SecondaryButton>
-        <PrimaryButton onClick={onSave}>Save</PrimaryButton>
+        <PrimaryButton isLoading={isSaving} onClick={onSave}>
+          {isSaving ? "Saving" : "Save"}
+        </PrimaryButton>
       </div>
     </div>
   );
