@@ -190,6 +190,5 @@ function generateTreeData(files) {
   Object.values(tree).forEach((item) => {
     calculateSizeRecursive(item);
   });
-  console.log(tree);
   return tree;
 }
