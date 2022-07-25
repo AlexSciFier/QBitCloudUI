@@ -25,6 +25,7 @@ export default function CustomTagInput({ name, onFetchCallback, delay = 500 }) {
     }
     debounced();
     return debounced.cancel;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setTags, tagInput, tags]);
 
   function addTag(textInput) {

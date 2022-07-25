@@ -12,7 +12,7 @@ export default function ContentTab() {
       setContent(res);
     };
     fetch();
-  }, []);
+  }, [torrentItem.hash]);
 
   return (
     <div>

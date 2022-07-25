@@ -1,14 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import Torrents from "../../../api/torrentsApi";
 import ModalConfirm from "../../../components/ModalConfirm";
 import { useTorrentItem } from "../../../context/torrentItemContext";
-import {
-  BsPlayFill,
-  BsPauseFill,
-  BsTrashFill,
-  BsPencilFill,
-} from "react-icons/bs";
+import { BsPlayFill, BsPauseFill, BsTrashFill } from "react-icons/bs";
 
 export function TorrentButtonGroup() {
   const { torrentItem } = useTorrentItem();

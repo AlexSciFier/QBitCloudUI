@@ -85,6 +85,7 @@ function SpeedChart() {
       (dlspeed / 1000000).toFixed(2),
     ];
     setSpeedData(nSpeedData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [torrentItem]);
 
   return (

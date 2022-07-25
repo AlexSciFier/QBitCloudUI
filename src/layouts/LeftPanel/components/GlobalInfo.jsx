@@ -14,6 +14,7 @@ export default function GlobalInfo() {
   const { updateGlobalInfo } = useGlobalInfo();
   useEffect(() => {
     updateGlobalInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -110,6 +111,7 @@ function GlobalSpeedChart() {
       (dlspeed / 1000000).toFixed(2),
     ];
     setSpeedData(nSpeedData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [globalInfo]);
 
   return (

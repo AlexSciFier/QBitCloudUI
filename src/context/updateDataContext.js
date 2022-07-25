@@ -62,12 +62,14 @@ export function UpdateDataProvider({ children }) {
 
     if (updatedData?.server_state?.refresh_interval)
       setRefreshRate(updatedData.server_state.refresh_interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updatedData]);
 
   useEffect(() => {
     timer.current = setInterval(async () => {
       manualUpdateData();
     }, refreshRate);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refreshRate]);
 
   const manualUpdateData = async () => {

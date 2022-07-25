@@ -9,6 +9,7 @@ export default function Tags() {
 
   useEffect(() => {
     updateTags();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function selectTag(tag) {

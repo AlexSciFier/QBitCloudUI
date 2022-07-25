@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import Sync from "./api/syncApi";
 import "./App.css";
-import { useUpdateData } from "./context/updateDataContext";
 import NotFoundLayout from "./layouts/404/NotFoundLayout";
 import Login from "./layouts/Login/Login";
 import MainLayout from "./layouts/Main/MainLayout";
@@ -44,6 +43,7 @@ function App() {
         setIsLoading(false);
         setError(true);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const routes = [

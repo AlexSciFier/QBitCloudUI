@@ -11,7 +11,7 @@ export default function TrackersTab() {
     Torrents.getTrackers(torrentItem.hash).then((res) => {
       setTrackers(res);
     });
-  }, []);
+  }, [torrentItem.hash]);
 
   const trackerStatusMap = {
     0: "Diasbled",

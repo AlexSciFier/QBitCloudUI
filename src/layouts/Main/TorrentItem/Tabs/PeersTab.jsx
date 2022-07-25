@@ -16,6 +16,7 @@ export default function PeersTab() {
     return () => {
       stopUpdate();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const manualUpdateData = async (fullUpdate = false) => {

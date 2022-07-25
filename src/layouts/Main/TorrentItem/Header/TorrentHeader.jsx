@@ -1,4 +1,4 @@
-import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/outline";
+import { ChevronRightIcon } from "@heroicons/react/outline";
 import React from "react";
 import { useTorrentItem } from "../../../../context/torrentItemContext";
 import { ProgressBar } from "./ProgressBar";

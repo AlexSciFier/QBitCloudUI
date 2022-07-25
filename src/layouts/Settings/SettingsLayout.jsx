@@ -19,7 +19,6 @@ import Downloads from "./Downloads";
 import SettingsBody from "./SettingsBody";
 import Speed from "./Speed";
 import WebUI from "./WebUI";
-import Torrents from "../../api/torrentsApi";
 
 export default function SettingsLayout() {
   /**
