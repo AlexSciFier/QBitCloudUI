@@ -141,9 +141,7 @@ export default function InfoTab() {
 
           <div className="md:col-span-4 sm:col-span-2 col-span-1">
             <TorrentInfoCard name="Name" icon={<DocumentIcon />}>
-              <div className="text-lg font-medium break-all">
-                {torrentItem.name}
-              </div>
+              <div className="text-lg font-medium">{torrentItem.name}</div>
             </TorrentInfoCard>
           </div>
 
@@ -152,7 +150,7 @@ export default function InfoTab() {
               name="State"
               icon={TORRENT_STATE[torrentItem.state].icon}
             >
-              <div className="text-lg font-medium break-all">
+              <div className="text-lg font-medium">
                 {TORRENT_STATE[torrentItem.state].description}
               </div>
             </TorrentInfoCard>
