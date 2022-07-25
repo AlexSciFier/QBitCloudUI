@@ -19,6 +19,7 @@ import Downloads from "./Downloads";
 import SettingsBody from "./SettingsBody";
 import Speed from "./Speed";
 import WebUI from "./WebUI";
+import Torrents from "../../api/torrentsApi";
 
 export default function SettingsLayout() {
   /**
@@ -94,13 +95,13 @@ export default function SettingsLayout() {
             <Downloads settings={settings} />
           </SettingsBody>
           <SettingsBody icon={<WifiIcon />} title={"Connection"}>
-            <Connection settings={settings} />
+            <Connection settings={settings} onSelectChange={handleFormChange} />
           </SettingsBody>
           <SettingsBody icon={<BsSpeedometer2 size={32} />} title={"Speed"}>
             <Speed settings={settings} />
           </SettingsBody>
           <SettingsBody icon={<ShareIcon />} title={"BitTorrent"}>
-            <Bitorrent settings={settings} />
+            <Bitorrent settings={settings} onSelectChange={handleFormChange} />
           </SettingsBody>
           <SettingsBody icon={<GlobeIcon />} title={"WebUI"}>
             <WebUI settings={settings} />
@@ -115,6 +116,12 @@ export default function SettingsLayout() {
           onUndo={() => {
             setChanged({});
             fetchSettings();
+          }}
+          onSave={() => {
+            Application.setPreferences(changed).then((res) => {
+              setChanged({});
+              fetchSettings();
+            });
           }}
         />
       )}

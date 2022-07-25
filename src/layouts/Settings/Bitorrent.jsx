@@ -7,13 +7,14 @@ import SettingsSubgroup from "./SettingsSubgroup";
 /**
  * @typedef {Object} WebUIProps
  * @property {import("../../api/applicationApi").preferences} settings
+ * @property {Function} onSelectChange
  */
 /**
  *
  * @param {WebUIProps} param0
  * @returns
  */
-export default function Bitorrent({ settings }) {
+export default function Bitorrent({ settings, onSelectChange }) {
   return (
     <div className="flex flex-col gap-3">
       <SettingsSubgroup title={"Privacy"}>
@@ -36,6 +37,7 @@ export default function Bitorrent({ settings }) {
           title={"Encription mode"}
           name={"encryption"}
           selectedIndex={settings.encryption}
+          onSelect={onSelectChange}
           items={[
             { name: "Allow encryption", value: 0 },
             { name: "Force encryption", value: 1 },

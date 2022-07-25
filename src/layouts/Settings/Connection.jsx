@@ -7,13 +7,14 @@ import SettingsSubgroup from "./SettingsSubgroup";
 /**
  * @typedef {Object} WebUIProps
  * @property {import("../../api/applicationApi").preferences} settings
+ * @property {Function} onSelectChange
  */
 /**
  *
  * @param {WebUIProps} param0
  * @returns
  */
-export default function Connection({ settings }) {
+export default function Connection({ settings, onSelectChange }) {
   return (
     <div className="flex flex-col gap-3">
       <SelectInput
@@ -23,6 +24,7 @@ export default function Connection({ settings }) {
           { value: 1, name: "TCP" },
           { value: 2, name: "μTP" },
         ]}
+        onSelect={onSelectChange}
         name={"bittorrent_protocol"}
         selectedIndex={settings.bittorrent_protocol}
       />

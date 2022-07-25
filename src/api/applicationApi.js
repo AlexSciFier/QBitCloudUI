@@ -184,7 +184,9 @@ export default class Application {
     return res;
   };
   static setPreferences = async (json) => {
-    let res = await get(this.#endpoint + "/setPreferences", { json });
+    let res = await get(this.#endpoint + "/setPreferences", {
+      json: JSON.stringify(json),
+    });
     return res;
   };
   static getDefaultSavePath = async () => {

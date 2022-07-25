@@ -13,7 +13,7 @@ import SettingsSubgroup from "./SettingsSubgroup";
  * @param {WebUIProps} param0
  * @returns
  */
-export default function Speed({ settings }) {
+export default function Speed({ settings, onSelectChange }) {
   return (
     <div className="flex flex-col gap-3">
       <SettingsSubgroup title={"Global rate limit"}>
@@ -91,6 +91,7 @@ export default function Speed({ settings }) {
             { value: 8, name: "Saturday" },
             { value: 9, name: "Sunday" },
           ]}
+          onSelect={onSelectChange}
           name={"scheduler_days"}
           selectedIndex={settings.scheduler_days}
         />

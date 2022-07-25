@@ -1,7 +1,12 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SelectorIcon } from "@heroicons/react/outline";
 
-export default function CustomSelect({ items, name, selectedIndex = 0 }) {
+export default function CustomSelect({
+  items,
+  name,
+  onSelect,
+  selectedIndex = 0,
+}) {
   const [selected, setSelected] = useState(
     items[selectedIndex] || { name: "", value: "" }
   );
@@ -30,6 +35,7 @@ export default function CustomSelect({ items, name, selectedIndex = 0 }) {
   function onItemClick(item) {
     setIsItemsShow(false);
     setSelected(item);
+    onSelect({ target: { name: name, type: "select", value: item.value } });
   }
 
   return (

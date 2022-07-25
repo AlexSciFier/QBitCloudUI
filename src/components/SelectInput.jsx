@@ -7,11 +7,17 @@ export function SelectInput({
   name,
   items,
   description,
+  onSelect,
   selectedIndex = 0,
 }) {
   return (
     <BaseInputWrapper title={title} description={description}>
-      <CustomSelect items={items} name={name} selectedIndex={selectedIndex} />
+      <CustomSelect
+        items={items}
+        name={name}
+        selectedIndex={selectedIndex}
+        onSelect={onSelect}
+      />
     </BaseInputWrapper>
   );
 }
