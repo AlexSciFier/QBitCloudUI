@@ -8,6 +8,7 @@ export function Input({
   description,
   value,
   placeholder,
+  disabled = false,
   onChange,
 }) {
   function onChangeHandler(e) {
@@ -21,6 +22,7 @@ export function Input({
         name={name}
         value={value}
         placeholder={placeholder}
+        disabled={disabled}
         className="border border-light rounded px-2 py-1 outline-none focus:ring focus:ring-primary"
         onChange={onChangeHandler}
       ></input>

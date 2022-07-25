@@ -5,6 +5,7 @@ export default function CustomSelect({
   items,
   name,
   onSelect,
+  disabled = false,
   selectedIndex = 0,
 }) {
   const [selected, setSelected] = useState(
@@ -48,7 +49,9 @@ export default function CustomSelect({
       ></input>
       <div
         onClick={() => setIsItemsShow(!isItemsShow)}
-        className="flex gap-1 items-center border border-light rounded px-2 py-1 hover:cursor-pointer select-none"
+        className={`flex gap-1 items-center border border-light rounded px-2 py-1 hover:cursor-pointer select-none ${
+          disabled ? "bg-light/30 pointer-events-none" : ""
+        }`}
       >
         <SelectorIcon className="w-5 h-5" />
         {selected.name}

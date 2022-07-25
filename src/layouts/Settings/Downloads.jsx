@@ -61,6 +61,7 @@ export default function Downloads({ settings }) {
           type={"text"}
           title="Default save path for incomplete torrents"
           name={"temp_path"}
+          disabled={!settings.temp_path_enabled}
           value={settings.temp_path}
         />
       </SettingsSubgroup>

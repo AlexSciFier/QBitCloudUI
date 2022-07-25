@@ -8,6 +8,7 @@ export function SelectInput({
   items,
   description,
   onSelect,
+  disabled = false,
   selectedIndex = 0,
 }) {
   return (
@@ -16,6 +17,7 @@ export function SelectInput({
         items={items}
         name={name}
         selectedIndex={selectedIndex}
+        disabled={disabled}
         onSelect={onSelect}
       />
     </BaseInputWrapper>

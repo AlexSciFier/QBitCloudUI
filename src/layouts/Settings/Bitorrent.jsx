@@ -61,18 +61,21 @@ export default function Bitorrent({ settings, onSelectChange }) {
           title={"Maximum active downloads"}
           name={"max_active_downloads"}
           value={settings.max_active_downloads}
+          disabled={!settings.queueing_enabled}
         />
         <Input
           type={"number"}
           title={"Maximum active uploads"}
           name={"max_active_uploads"}
           value={settings.max_active_uploads}
+          disabled={!settings.queueing_enabled}
         />
         <Input
           type={"number"}
           title={"Maximum active torrents"}
           name={"max_active_torrents"}
           value={settings.max_active_torrents}
+          disabled={!settings.queueing_enabled}
         />
       </SettingsSubgroup>
     </div>

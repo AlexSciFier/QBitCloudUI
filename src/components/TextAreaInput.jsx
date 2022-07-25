@@ -1,7 +1,15 @@
 import React from "react";
 import { BaseInputWrapper } from "./BaseInputWrapper";
 
-export function TextAreaInput({ title, name, description, value, onChange }) {
+export function TextAreaInput({
+  title,
+  name,
+  description,
+  value,
+  disabled,
+  rows,
+  onChange,
+}) {
   function onChangeHandler(e) {
     if (onChange) onChange(e);
   }
@@ -12,6 +20,8 @@ export function TextAreaInput({ title, name, description, value, onChange }) {
         name={name}
         className="border border-light rounded px-2 py-1"
         value={value}
+        disabled={disabled}
+        rows={rows}
         onChange={onChangeHandler}
       ></textarea>
     </BaseInputWrapper>

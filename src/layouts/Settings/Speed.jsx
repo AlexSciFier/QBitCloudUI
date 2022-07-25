@@ -57,24 +57,28 @@ export default function Speed({ settings, onSelectChange }) {
           title="From (hours)"
           name={"schedule_from_hour"}
           value={settings.schedule_from_hour}
+          disabled={!settings.scheduler_enabled}
         />
         <Input
           type={"number"}
           title="From (minutes)"
           name={"schedule_from_min"}
           value={settings.schedule_from_min}
+          disabled={!settings.scheduler_enabled}
         />
         <Input
           type={"number"}
           title="To (hours)"
           name={"schedule_to_hour"}
           value={settings.schedule_to_hour}
+          disabled={!settings.scheduler_enabled}
         />
         <Input
           type={"number"}
           title="To (minutes)"
           name={"schedule_to_min"}
           value={settings.schedule_to_min}
+          disabled={!settings.scheduler_enabled}
         />
 
         <SelectInput
@@ -94,6 +98,7 @@ export default function Speed({ settings, onSelectChange }) {
           onSelect={onSelectChange}
           name={"scheduler_days"}
           selectedIndex={settings.scheduler_days}
+          disabled={!settings.scheduler_enabled}
         />
       </SettingsSubgroup>
       <SettingsSubgroup title={"Rate limits"}>

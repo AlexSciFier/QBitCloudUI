@@ -47,12 +47,14 @@ export default function WebUI({ settings }) {
           title={"Certificate path"}
           name={"web_ui_https_cert_path"}
           value={settings.web_ui_https_cert_path}
+          disabled={!settings.use_https}
         />
         <Input
           type={"text"}
           title={"Key path"}
           name={"web_ui_https_key_path"}
           value={settings.web_ui_https_key_path}
+          disabled={!settings.use_https}
         />
       </SettingsSubgroup>
       <SettingsSubgroup title={"Authentication"}>
@@ -82,6 +84,8 @@ export default function WebUI({ settings }) {
           title={"IP Subnet whitelist"}
           name={"bypass_auth_subnet_whitelist"}
           value={settings.bypass_auth_subnet_whitelist}
+          rows={settings.bypass_auth_subnet_whitelist.split("\n").length}
+          disabled={!settings.bypass_auth_subnet_whitelist_enabled}
         />
         <Input
           type={"number"}
@@ -113,6 +117,7 @@ export default function WebUI({ settings }) {
           title={"Web UI path"}
           name={"alternative_webui_path"}
           value={settings.alternative_webui_path}
+          disabled={!settings.alternative_webui_enabled}
         />
       </SettingsSubgroup>
       <SettingsSubgroup title={"Security"}>
@@ -130,6 +135,7 @@ export default function WebUI({ settings }) {
           title={"Enable cookie Secure flag (requires HTTPS)"}
           name={"web_ui_secure_cookie_enabled"}
           defaultChecked={settings.web_ui_secure_cookie_enabled}
+          disabled={!settings.use_https}
         />
         <CheckInput
           title={"Enable host headers validation"}
@@ -141,6 +147,7 @@ export default function WebUI({ settings }) {
           title={"Server domian"}
           name={"web_ui_domain_list"}
           value={settings.web_ui_domain_list}
+          disabled={!settings.web_ui_host_header_validation_enabled}
         />
         <CheckInput
           title={"Use custom HTTP headers"}
@@ -150,6 +157,8 @@ export default function WebUI({ settings }) {
         <TextAreaInput
           name={"web_ui_custom_http_headers"}
           value={settings.web_ui_custom_http_headers}
+          rows={settings.web_ui_custom_http_headers.split("\n").length}
+          disabled={!settings.web_ui_use_custom_http_headers_enabled}
         />
       </SettingsSubgroup>
     </div>
