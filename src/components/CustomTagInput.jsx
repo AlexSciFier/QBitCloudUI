@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 
 export default function CustomTagInput({ name, onFetchCallback, delay = 500 }) {
   const [tags, setTags] = useState([]);

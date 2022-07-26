@@ -6,7 +6,7 @@ import {
   WifiIcon,
 } from "@heroicons/react/outline";
 import { BsSpeedometer2 } from "react-icons/bs";
-import { isEmpty } from "lodash";
+import isEmpty from "lodash/isEmpty";
 import React, { useEffect, useState } from "react";
 import Application from "../../api/applicationApi";
 import PageBody from "../../components/PageBody";

@@ -1,4 +1,4 @@
-import { uniq } from "lodash";
+import uniq from "lodash/uniq";
 import React, { createContext, useContext, useState } from "react";
 import Torrents from "../api/torrentsApi";
 import { useIsLoggedIn } from "./isLoggedInContext";

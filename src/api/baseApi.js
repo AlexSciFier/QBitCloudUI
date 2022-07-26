@@ -1,4 +1,4 @@
-import { isEmpty } from "lodash";
+import isEmpty from "lodash/isEmpty";
 const BASE_URL =
   process.env.NODE_ENV === "production"
     ? document.location.origin
