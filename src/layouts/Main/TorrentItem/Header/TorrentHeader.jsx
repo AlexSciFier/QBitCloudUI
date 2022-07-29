@@ -23,7 +23,7 @@ export function TorrentHeader({ isOpen, onClick }) {
           </div>
           <div className="truncate">{torrentItem.name}</div>
         </div>
-        <div className="flex-1 flex gap-3 text-neutral">
+        <div className="flex-1 flex gap-1 text-neutral">
           <div className="md:block hidden">{torrentItem.category}</div>
           <div className="md:block hidden">{torrentItem.tags}</div>
         </div>
