@@ -6,9 +6,16 @@ import {
   LinkIcon,
 } from "@heroicons/react/outline";
 import React, { useEffect, useState } from "react";
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  YAxis,
+} from "recharts";
 import { useGlobalInfo } from "../../../context/globalInfoContext";
 import { toReadableSize, toReadableSpeed } from "../../../utils/helpers";
-import Chart from "react-apexcharts";
 
 export default function GlobalInfo() {
   const { updateGlobalInfo } = useGlobalInfo();
@@ -28,97 +35,91 @@ export default function GlobalInfo() {
 
 function GlobalSpeedChart() {
   const { globalInfo } = useGlobalInfo();
+
+  let speedLimit =
+    Math.max(globalInfo?.dl_rate_limit || 0, globalInfo?.up_rate_limit || 0) /
+    1000000;
   let dlspeed = globalInfo?.dl_info_speed || 0;
   let upspeed = globalInfo?.up_info_speed || 0;
 
-  const options = {
-    colors: ["#ef4444", "#22c55e"],
-    chart: {
-      animations: {
-        dynamicAnimation: {
-          enabled: false,
-        },
-      },
-      type: "area",
-      height: "100%",
-      toolbar: {
-        show: false,
-      },
-      foreColor: "#000",
-      zoom: {
-        autoScaleYaxis: false,
-      },
-    },
-    legend: {
-      show: false,
-    },
-    grid: {
-      show: false,
-    },
-    tooltip: {
-      x: {
-        show: false,
-      },
-      y: {
-        show: false,
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      curve: "smooth",
-    },
-    yaxis: {
-      show: false,
-      labels: {
-        formatter: (value) => {
-          return value.toFixed(2) + " Mb/s";
-        },
-      },
-    },
-    xaxis: {
-      labels: {
-        show: false,
-      },
-      tooltip: {
-        enabled: false,
-      },
-    },
-  };
-  const [speedData, setSpeedData] = useState([
-    {
-      name: "Upload",
-      x: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    },
-    {
-      name: "Download",
-      x: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    },
-  ]);
+  const [speedData, setSpeedData] = useState(
+    [...Array(10)].fill({ time: "", dl: 0, up: 0 })
+  );
+
   useEffect(() => {
-    var nSpeedData = [...speedData];
-    nSpeedData[0].data.shift();
-    nSpeedData[1].data.shift();
-    nSpeedData[0].data = [
-      ...nSpeedData[0].data,
-      (upspeed / 1000000).toFixed(2),
-    ];
-    nSpeedData[1].data = [
-      ...nSpeedData[1].data,
-      (dlspeed / 1000000).toFixed(2),
-    ];
-    setSpeedData(nSpeedData);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setSpeedData((prev) => {
+      let prevCopy = [...prev];
+      prevCopy.shift();
+      return [
+        ...prevCopy,
+        {
+          time: new Date().toLocaleTimeString(),
+          dl: dlspeed / 1000000,
+          up: upspeed / 1000000,
+        },
+      ];
+    });
   }, [globalInfo]);
 
   return (
     <div className="speedTab">
-      <Chart options={options} series={speedData} type="area" height={"100%"} />
+      <ResponsiveContainer minHeight={150}>
+        <AreaChart data={speedData} dataKey={"time"}>
+          <Tooltip content={CustomTooltip} />
+          <CartesianGrid vertical={false} stroke="#e1e1e1" />
+          <YAxis
+            axisLine={false}
+            tick={false}
+            width={0}
+            domain={[0, speedLimit > 0 ? speedLimit * 1.2 : "auto"]}
+          />
+          <Area
+            type="monotone"
+            name="Download"
+            dataKey="dl"
+            stroke="#22c55e"
+            strokeWidth={3}
+            fill="#22c55e"
+            fillOpacity={0.3}
+            isAnimationActive={false}
+          />
+          <Area
+            type="monotone"
+            name="Upload"
+            dataKey="up"
+            stroke="#06b6d4"
+            strokeWidth={3}
+            fill="#06b6d4"
+            fillOpacity={0.3}
+            isAnimationActive={false}
+          />
+        </AreaChart>
+      </ResponsiveContainer>
     </div>
   );
+}
+
+function CustomTooltip({ active, payload, label }) {
+  if (active && payload && payload.length) {
+    return (
+      <div className="px-3 py-1 flex flex-col gap-1 border border-light rounded bg-white">
+        {payload.map((item) => (
+          <div key={item.name} className="flex gap-1 items-center">
+            <div
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: item.stroke }}
+            ></div>
+            <div className="flex-1 flex justify-between gap-1 items-center">
+              <div>{`${item.name}`}</div>
+              <div>{`${item.value.toFixed(2)}`} mb/s</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return null;
 }
 
 function SpeedIndicator() {

@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Chart from "react-apexcharts";
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  ReferenceLine,
+  ResponsiveContainer,
+  Tooltip,
+  YAxis,
+} from "recharts";
+import { useGlobalInfo } from "../../../../context/globalInfoContext";
 import { useTorrentItem } from "../../../../context/torrentItemContext";
 
 export default function SpeedTab() {
@@ -13,82 +22,95 @@ export default function SpeedTab() {
 function SpeedChart() {
   const xAxisItemsCount = 20;
   const { torrentItem } = useTorrentItem();
+  const { globalInfo } = useGlobalInfo();
+
+  let speedLimit =
+    Math.max(globalInfo?.dl_rate_limit || 0, globalInfo?.up_rate_limit || 0) /
+    1000000;
   let dlspeed = torrentItem?.dlspeed || 0;
   let upspeed = torrentItem?.upspeed || 0;
-  const options = {
-    colors: ["#ef4444", "#22c55e"],
-    chart: {
-      animations: {
-        dynamicAnimation: {
-          enabled: false,
-        },
-      },
-      type: "area",
-      toolbar: {
-        show: false,
-      },
-      foreColor: "#000",
-      zoom: {
-        autoScaleYaxis: false,
-      },
-    },
 
-    tooltip: {
-      x: {
-        show: false,
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      curve: "smooth",
-    },
-    yaxis: {
-      labels: {
-        formatter: (value) => {
-          return value.toFixed(2) + " Mb/s";
-        },
-      },
-    },
-    xaxis: {
-      labels: {
-        show: false,
-      },
-      tooltip: {
-        enabled: false,
-      },
-    },
-  };
-  const [speedData, setSpeedData] = useState([
-    {
-      name: "Upload",
-      x: [...Array(xAxisItemsCount).keys()],
-      data: [...Array(xAxisItemsCount).keys()].fill(0),
-    },
-    {
-      name: "Download",
-      x: [...Array(xAxisItemsCount).keys()],
-      data: [...Array(xAxisItemsCount).keys()].fill(0),
-    },
-  ]);
+  const [speedData, setSpeedData] = useState(
+    [...Array(xAxisItemsCount)].fill({ time: "", dl: 0, up: 0 })
+  );
+
   useEffect(() => {
-    var nSpeedData = [...speedData];
-    nSpeedData[0].data.shift();
-    nSpeedData[1].data.shift();
-    nSpeedData[0].data = [
-      ...nSpeedData[0].data,
-      (upspeed / 1000000).toFixed(2),
-    ];
-    nSpeedData[1].data = [
-      ...nSpeedData[1].data,
-      (dlspeed / 1000000).toFixed(2),
-    ];
-    setSpeedData(nSpeedData);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setSpeedData((prev) => {
+      let prevCopy = [...prev];
+      prevCopy.shift();
+      return [
+        ...prevCopy,
+        {
+          time: new Date().toLocaleTimeString(),
+          dl: dlspeed / 1000000,
+          up: upspeed / 1000000,
+        },
+      ];
+    });
   }, [torrentItem]);
 
   return (
-    <Chart options={options} series={speedData} type="area" height={"100%"} />
+    <ResponsiveContainer minHeight={150}>
+      <AreaChart data={speedData} dataKey={"time"}>
+        <Tooltip content={CustomTooltip} />
+        <CartesianGrid vertical={false} stroke="#e1e1e1" />
+        <YAxis
+          domain={[0, speedLimit > 0 ? speedLimit * 1.2 : "auto"]}
+          tickFormatter={(value) => value.toFixed(2)}
+          unit={"mb/s"}
+          width={70}
+        />
+        {speedLimit > 0 && (
+          <ReferenceLine
+            y={speedLimit}
+            label="Speed limit"
+            stroke="red"
+            strokeDasharray="3 3"
+          />
+        )}
+        <Area
+          type="monotone"
+          name="Download"
+          dataKey="dl"
+          stroke="#22c55e"
+          strokeWidth={3}
+          fill="#22c55e"
+          fillOpacity={0.3}
+          isAnimationActive={false}
+        />
+        <Area
+          type="monotone"
+          name="Upload"
+          dataKey="up"
+          stroke="#06b6d4"
+          strokeWidth={3}
+          fill="#06b6d4"
+          fillOpacity={0.3}
+          isAnimationActive={false}
+        />
+      </AreaChart>
+    </ResponsiveContainer>
   );
+}
+function CustomTooltip({ active, payload, label }) {
+  if (active && payload && payload.length) {
+    return (
+      <div className="px-3 py-1 flex flex-col gap-1 border border-light rounded bg-white">
+        {payload.map((item) => (
+          <div key={item.name} className="flex gap-1 items-center">
+            <div
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: item.stroke }}
+            ></div>
+            <div className="flex-1 flex justify-between gap-1 items-center">
+              <div>{`${item.name}`}</div>
+              <div>{`${item.value.toFixed(2)}`} mb/s</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return null;
 }
