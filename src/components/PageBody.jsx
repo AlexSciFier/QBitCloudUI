@@ -18,7 +18,7 @@ function PageHeader({ title }) {
   return (
     <div className="flex gap-3 items-center sticky top-0 bg-white z-10">
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => navigate("/")}
         className="w-8 h-8 p-1 hover:bg-light rounded-full"
       >
         <ArrowLeftIcon />

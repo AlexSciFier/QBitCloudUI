@@ -19,8 +19,10 @@ import Downloads from "./Downloads";
 import SettingsBody from "./SettingsBody";
 import Speed from "./Speed";
 import WebUI from "./WebUI";
+import { Link, useLocation } from "react-router-dom";
 
 export default function SettingsLayout() {
+  const location = useLocation();
   /**
    * @type {[import("../../api/applicationApi").preferences, React.Dispatch<React.SetStateAction<import("../../api/applicationApi").preferences>>]}
    */
@@ -57,6 +59,13 @@ export default function SettingsLayout() {
     setHeadings(elements);
   }, [settings]);
 
+  useEffect(() => {
+    let id = decodeURI(location.hash.substring(1));
+    document
+      .getElementById(id)
+      ?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [location]);
+
   function handleFormChange(e) {
     let key = e.target.name;
     let type = e.target.type;
@@ -77,14 +86,14 @@ export default function SettingsLayout() {
       <div className="flex flex-1 gap-3">
         <div className="flex flex-col w-1/6 sticky top-8 self-start">
           {headings?.map((item) => (
-            <a
+            <Link
               key={item.id}
               className={"px-1 py-1 rounded hover:bg-primary hover:text-white"}
               style={{ marginLeft: `${item.level - 1}rem` }}
-              href={`#${item.id}`}
+              to={`/settings#${item.id}`}
             >
               {item.text}
-            </a>
+            </Link>
           ))}
         </div>
         <form
