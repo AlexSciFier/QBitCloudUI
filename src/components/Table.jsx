@@ -31,13 +31,13 @@ import React from "react";
 export default function Table({ columns, rows, fixed = false }) {
   return (
     <div
-      className={`table w-full overflow-x-auto border border-light rounded-lg ${
+      className={`table w-full overflow-x-auto border border-light dark:border-neutral rounded-lg ${
         fixed ? "table-fixed" : "table-auto"
       }`}
     >
       {columns && (
         <div className="table-header-group">
-          <div className="table-row divide-x divide-light">
+          <div className="table-row divide-x divide-light dark:divide-neutral">
             {columns?.map((col) => (
               <div
                 key={col.name}
@@ -54,8 +54,8 @@ export default function Table({ columns, rows, fixed = false }) {
         {rows?.map((row, idx) => (
           <div
             key={row?.id}
-            className={`table-row divide-x divide-light ${
-              idx % 2 === 1 ? "bg-light" : ""
+            className={`table-row divide-x divide-light dark:divide-neutral ${
+              idx % 2 === 1 ? "bg-light dark:bg-neutral/30" : ""
             }`}
           >
             {row.cells.map((cell) => (

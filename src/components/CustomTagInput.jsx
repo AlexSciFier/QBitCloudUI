@@ -43,7 +43,7 @@ export default function CustomTagInput({ name, onFetchCallback, delay = 500 }) {
   return (
     <div className="relative">
       <input type={"hidden"} id={name} name={name} value={tags.join(",")} />
-      <div className="flex items-center rounded border border-light">
+      <div className="flex items-center rounded border border-light dark:border-neutral">
         <div className="flex gap-2 px-2">
           {tags.map((tag, idx) => (
             <div
@@ -53,7 +53,7 @@ export default function CustomTagInput({ name, onFetchCallback, delay = 500 }) {
               {tag}
               <div
                 onClick={(e) => deleteTag(e, tag)}
-                className="ml-1 px-1 hover:bg-white/10"
+                className="ml-1 px-1 hover:bg-white/20 cursor-pointer"
               >
                 ×
               </div>
@@ -61,7 +61,7 @@ export default function CustomTagInput({ name, onFetchCallback, delay = 500 }) {
           ))}
         </div>
         <input
-          className="w-full focus:outline-none py-2"
+          className="w-full focus:outline-none py-2 bg-transparent"
           type={"text"}
           list={"tags"}
           placeholder="Tags"
@@ -72,7 +72,7 @@ export default function CustomTagInput({ name, onFetchCallback, delay = 500 }) {
         ></input>
       </div>
       {tagInput && (
-        <ul className="absolute bg-white text-black left-0 right-0 mt-1 py-1 rounded shadow-lg">
+        <ul className="absolute bg-white text-black dark:bg-dark dark:text-white dark:border dark:border-neutral left-0 right-0 mt-1 py-1 rounded shadow-lg">
           <li
             className="px-4 hover:bg-primary hover:text-white cursor-pointer"
             onClick={() => {

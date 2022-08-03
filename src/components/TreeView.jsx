@@ -24,7 +24,7 @@ const priorityEnum = {
 export default function TreeView({ files }) {
   let struct = generateTreeData(files);
   return (
-    <div className="border border-light rounded-lg p-1">
+    <div className="border border-light dark:border-neutral rounded-lg p-1">
       {struct.map((item) => (
         <TreeItem key={item.key} item={item} />
       ))}
@@ -59,7 +59,7 @@ function TreeItem({ item }) {
         onClick={() => setShowChildren(!showChildren)}
       >
         <div
-          className="flex gap-1 items-center hover:bg-light rounded px-1"
+          className="flex gap-1 items-center hover:bg-light dark:hover:bg-neutral/30 rounded px-1"
           style={{ marginLeft: `${item.key.split("-")[1]}rem` }}
         >
           {item.children.length > 0 && (

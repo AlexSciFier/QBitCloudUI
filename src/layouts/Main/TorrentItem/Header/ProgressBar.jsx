@@ -3,7 +3,7 @@ import React from "react";
 export function ProgressBar({ progress = 0 }) {
   return (
     <div className="flex gap-1 items-center">
-      <div className="w-full h-2 bg-light rounded">
+      <div className="w-full h-2 bg-light dark:bg-neutral rounded">
         <div
           className={`${
             progress === 1

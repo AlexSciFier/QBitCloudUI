@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Authentication from "../../api/authenticationApi";
+import { Input } from "../../components/Input";
 import { InputPassword, InputText } from "../../components/Inputs";
 import PrimaryButton from "../../components/PrimaryButton";
 import { useIsLoggedIn } from "../../context/isLoggedInContext";
@@ -33,14 +34,16 @@ export default function Login() {
     }
   };
   return (
-    <div className="flex justify-center h-screen items-center">
+    <div className="flex justify-center h-screen items-center dark:bg-dark dark:text-white">
       <form className="flex flex-col gap-3 w-1/4" onSubmit={formSubmit}>
-        <InputText
+        <Input
+          type="text"
           placeholder={"Login"}
           value={login}
           onChange={(e) => setLogin(e.target.value)}
         />
-        <InputPassword
+        <Input
+          type="password"
           placeholder={"Password"}
           value={passowrd}
           onChange={(e) => setPassowrd(e.target.value)}

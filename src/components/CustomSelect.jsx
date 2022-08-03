@@ -49,7 +49,7 @@ export default function CustomSelect({
       ></input>
       <div
         onClick={() => setIsItemsShow(!isItemsShow)}
-        className={`flex gap-1 items-center border border-light rounded px-2 py-1 hover:cursor-pointer select-none ${
+        className={`flex gap-1 items-center border border-light dark:border-neutral rounded px-2 py-1 hover:cursor-pointer select-none ${
           disabled ? "bg-light/30 pointer-events-none" : ""
         }`}
       >
@@ -57,7 +57,7 @@ export default function CustomSelect({
         {selected.name}
       </div>
       {isItemsShow && (
-        <div className="absolute mt-1 z-50 rounded border border-light shadow-lg py-1 bg-white w-full">
+        <div className="absolute mt-1 z-50 rounded border border-light dark:border-neutral shadow-lg py-1 bg-white dark:bg-dark w-full">
           {items.map((item) => (
             <div
               onClick={() => onItemClick(item)}

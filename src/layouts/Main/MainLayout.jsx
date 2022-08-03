@@ -22,7 +22,7 @@ export default function MainLayout() {
           <TagsProvider>
             <UpdateDataProvider>
               <TorrentFilterProvider>
-                <div className="h-screen flex flex-col">
+                <div className="h-screen flex flex-col dark:bg-dark dark:text-white">
                   <section className="flex flex-1 overflow-hidden divide-light">
                     <section
                       className={

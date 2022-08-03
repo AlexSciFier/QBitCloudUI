@@ -10,7 +10,7 @@ export function TextInput({ title, name, description, value, placeholder }) {
         name={name}
         value={value}
         placeholder={placeholder}
-        className="border border-light rounded px-2 py-1"
+        className="border bg-transparent border-light dark:border-neutral rounded px-2 py-1"
       ></input>
     </BaseInputWrapper>
   );

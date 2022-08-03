@@ -14,6 +14,7 @@ import {
   ResponsiveContainer,
   YAxis,
 } from "recharts";
+import { CustomTooltip } from "../../../components/CustomTooltip";
 import { useGlobalInfo } from "../../../context/globalInfoContext";
 import { toReadableSize, toReadableSpeed } from "../../../utils/helpers";
 
@@ -97,29 +98,6 @@ function GlobalSpeedChart() {
       </ResponsiveContainer>
     </div>
   );
-}
-
-function CustomTooltip({ active, payload, label }) {
-  if (active && payload && payload.length) {
-    return (
-      <div className="px-3 py-1 flex flex-col gap-1 border border-light rounded bg-white">
-        {payload.map((item) => (
-          <div key={item.name} className="flex gap-1 items-center">
-            <div
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: item.stroke }}
-            ></div>
-            <div className="flex-1 flex justify-between gap-1 items-center">
-              <div>{`${item.name}`}</div>
-              <div>{`${item.value.toFixed(2)}`} mb/s</div>
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  return null;
 }
 
 function SpeedIndicator() {

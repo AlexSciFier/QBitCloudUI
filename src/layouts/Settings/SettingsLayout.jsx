@@ -1,4 +1,5 @@
 import {
+  ColorSwatchIcon,
   GlobeIcon,
   QuestionMarkCircleIcon,
   ShareIcon,
@@ -20,6 +21,7 @@ import SettingsBody from "./SettingsBody";
 import Speed from "./Speed";
 import WebUI from "./WebUI";
 import { Link, useLocation } from "react-router-dom";
+import Theme from "./Theme";
 
 export default function SettingsLayout() {
   const location = useLocation();
@@ -96,29 +98,40 @@ export default function SettingsLayout() {
             </Link>
           ))}
         </div>
-        <form
-          className="flex-1 flex flex-col gap-12"
-          onChange={handleFormChange}
-        >
-          <SettingsBody icon={<SwitchVerticalIcon />} title={"Downloads"}>
-            <Downloads settings={settings} />
+        <div>
+          <SettingsBody icon={<ColorSwatchIcon />} title={"Theme"}>
+            <Theme />
           </SettingsBody>
-          <SettingsBody icon={<WifiIcon />} title={"Connection"}>
-            <Connection settings={settings} onSelectChange={handleFormChange} />
-          </SettingsBody>
-          <SettingsBody icon={<BsSpeedometer2 size={32} />} title={"Speed"}>
-            <Speed settings={settings} />
-          </SettingsBody>
-          <SettingsBody icon={<ShareIcon />} title={"BitTorrent"}>
-            <Bitorrent settings={settings} onSelectChange={handleFormChange} />
-          </SettingsBody>
-          <SettingsBody icon={<GlobeIcon />} title={"WebUI"}>
-            <WebUI settings={settings} />
-          </SettingsBody>
-          <SettingsBody icon={<QuestionMarkCircleIcon />} title={"About"}>
-            <div>About</div>
-          </SettingsBody>
-        </form>
+          <form
+            className="flex-1 flex flex-col gap-12 mt-12"
+            onChange={handleFormChange}
+          >
+            <SettingsBody icon={<SwitchVerticalIcon />} title={"Downloads"}>
+              <Downloads settings={settings} />
+            </SettingsBody>
+            <SettingsBody icon={<WifiIcon />} title={"Connection"}>
+              <Connection
+                settings={settings}
+                onSelectChange={handleFormChange}
+              />
+            </SettingsBody>
+            <SettingsBody icon={<BsSpeedometer2 size={32} />} title={"Speed"}>
+              <Speed settings={settings} />
+            </SettingsBody>
+            <SettingsBody icon={<ShareIcon />} title={"BitTorrent"}>
+              <Bitorrent
+                settings={settings}
+                onSelectChange={handleFormChange}
+              />
+            </SettingsBody>
+            <SettingsBody icon={<GlobeIcon />} title={"WebUI"}>
+              <WebUI settings={settings} />
+            </SettingsBody>
+            <SettingsBody icon={<QuestionMarkCircleIcon />} title={"About"}>
+              <div>About</div>
+            </SettingsBody>
+          </form>
+        </div>
       </div>
       {isEmpty(changed) === false && (
         <UnsavedChangesPopup
@@ -143,7 +156,7 @@ export default function SettingsLayout() {
 
 function UnsavedChangesPopup({ onUndo, onSave, isSaving }) {
   return (
-    <div className="sticky bottom-3 flex justify-between items-center bg-white py-1 px-3 rounded-md shadow-md">
+    <div className="sticky bottom-3 flex justify-between items-center bg-white dark:bg-dark dark:border dark:border-neutral py-1 px-3 rounded-md shadow-md">
       <div>Unsaved changes</div>
       <div className="flex gap-3">
         <SecondaryButton onClick={onUndo}>Undo</SecondaryButton>
