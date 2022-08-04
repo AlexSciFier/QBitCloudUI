@@ -3,6 +3,7 @@ import Torrents from "../../../api/torrentsApi";
 import ModalConfirm from "../../../components/ModalConfirm";
 import { useTorrentItem } from "../../../context/torrentItemContext";
 import { BsPlayFill, BsPauseFill, BsTrashFill } from "react-icons/bs";
+import { CheckInput } from "../../../components/CheckInput";
 
 export function TorrentButtonGroup() {
   const { torrentItem } = useTorrentItem();
@@ -43,15 +44,11 @@ export function TorrentButtonGroup() {
           onCancel={() => cancelDelete()}
         >
           <div>Are you sure you want to delete {torrentItem.name}?</div>
-          <div className="flex gap-1 items-center">
-            <input
-              id="deleteFiles"
-              type={"checkbox"}
-              onChange={(e) => setDeleteDownloaded(e.target.checked)}
-              checked={deleteDownloaded}
-            />
-            <label htmlFor="deleteFiles">Delete downloaded files</label>
-          </div>
+          <CheckInput
+            title={"Delete downloaded files"}
+            name="deleteFiles"
+            onChange={(e) => setDeleteDownloaded(e.target.checked)}
+          />
         </ModalConfirm>
       )}
       <div className="flex gap-3">

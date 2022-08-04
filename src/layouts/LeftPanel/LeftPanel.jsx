@@ -5,12 +5,10 @@ import Tags from "./components/Tags";
 
 export default function LeftPanel() {
   return (
-    <div className="p-3 h-full flex flex-col gap-3">
+    <div className="p-3 h-full flex flex-col gap-3 overflow-y-auto overflow-x-hidden flex-1">
       <GlobalInfo />
-      <div className="overflow-y-auto flex-1">
-        <Categories />
-        <Tags />
-      </div>
+      <Categories />
+      <Tags />
     </div>
   );
 }
