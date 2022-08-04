@@ -1,12 +1,23 @@
-import { MoonIcon } from "@heroicons/react/outline";
+import { MoonIcon, PencilIcon } from "@heroicons/react/outline";
 import SunIcon from "@heroicons/react/outline/SunIcon";
-import React from "react";
+import React, { useState } from "react";
 import { SelectInput } from "../../components/SelectInput";
 import { useTheme } from "../../context/themeContext";
 
 export default function Theme() {
-  const { mainColor, setMainColor, secondaryColor, setSecondaryColor } =
-    useTheme();
+  return (
+    <div className="flex flex-col gap-3">
+      <ThemeSwitcher />
+      <ColorSwitcher />
+    </div>
+  );
+}
+
+function ColorSwitcher() {
+  const { mainColor, setMainColor } = useTheme();
+  const [customColor, setCustomColor] = useState(mainColor);
+  const [customColorSelected, setCustomColorSelected] = useState(false);
+
   const mainColors = [
     { name: "Cyan", value: "#06b6d4" },
     { name: "Teal", value: "#14b8a6" },
@@ -15,36 +26,53 @@ export default function Theme() {
     { name: "Red", value: "#ef4444" },
     { name: "Fuchsia", value: "#d946ef" },
   ];
-  const secondaryColors = [
-    { name: "Cyan", value: "#22d3ee" },
-    { name: "Teal", value: "#2dd4bf" },
-    { name: "Emerald", value: "#34d399" },
-    { name: "Amber", value: "#fbbf24" },
-    { name: "Red", value: "#f87171" },
-    { name: "Fuchsia", value: "#e879f9" },
-  ];
   return (
     <div className="flex flex-col gap-3">
-      <ThemeSwitcher />
-      <div>
-        <SelectInput
-          items={mainColors}
-          title="Main color"
-          selectedIndex={mainColors.map((e) => e.value).indexOf(mainColor)}
-          onSelect={(e) => setMainColor(e.target.value)}
-        />
-        <SelectInput
-          items={secondaryColors}
-          title="Additional color"
-          selectedIndex={secondaryColors
-            .map((e) => e.value)
-            .indexOf(secondaryColor)}
-          onSelect={(e) => setSecondaryColor(e.target.value)}
-        />
+      <div className="text-xl font-light">Main color</div>
+      <div className="grid grid-cols-6 gap-3">
+        {mainColors.map((color) => (
+          <label key={color.value}>
+            <input
+              type={"radio"}
+              className="peer hidden"
+              name="main-color"
+              checked={color.value === mainColor}
+              onChange={(e) => {
+                setMainColor(color.value);
+                setCustomColorSelected(false);
+              }}
+            />
+            <div
+              className="w-12 h-12 rounded-full peer-checked:ring dark:peer-checked:ring-white peer-checked:ring-dark"
+              style={{ backgroundColor: color.value }}
+            ></div>
+          </label>
+        ))}
+
+        <label className="relative">
+          <input
+            type={"color"}
+            value={mainColor}
+            className="hidden"
+            onChange={(e) => {
+              setCustomColor(e.target.value);
+              setCustomColorSelected(true);
+              if (customColorSelected) {
+                setMainColor(e.target.value);
+              }
+            }}
+          ></input>
+          <div
+            className="w-12 h-12 rounded-full peer-checked:ring dark:peer-checked:ring-white peer-checked:ring-dark"
+            style={{ backgroundColor: mainColor }}
+          ></div>
+          <PencilIcon className="w-6 h-6 absolute top-3 left-3 text-white mix-blend-difference" />
+        </label>
       </div>
     </div>
   );
 }
+
 function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
   return (

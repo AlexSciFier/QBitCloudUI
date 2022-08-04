@@ -42,9 +42,7 @@ export default function Tags() {
   );
 }
 function TagItem({ name, selected, onClick }) {
-  let selectedClass = selected
-    ? "rounded bg-gradient-to-r from-primary to-primaryLight text-white"
-    : "";
+  let selectedClass = selected ? "rounded bg-primary text-white" : "";
   return (
     <div
       className={

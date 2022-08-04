@@ -56,19 +56,19 @@ export function TorrentButtonGroup() {
       )}
       <div className="flex gap-3">
         <button
-          className="bg-gradient-to-r from-primary to-primaryLight transition hover:shadow-md hover:shadow-primary/50 text-white rounded-full flex justify-center items-center h-8 w-8 p-1"
+          className="bg-primary transition hover:shadow-md hover:shadow-primary/50 text-white rounded-full flex justify-center items-center h-8 w-8 p-1"
           onClick={() => resumeTorrent()}
         >
           <BsPlayFill />
         </button>
         <button
-          className="bg-gradient-to-r from-primary to-primaryLight transition hover:shadow-md hover:shadow-primary/50 text-white rounded-full flex justify-center items-center h-8 w-8 p-1"
+          className="bg-primary transition hover:shadow-md hover:shadow-primary/50 text-white rounded-full flex justify-center items-center h-8 w-8 p-1"
           onClick={() => pauseTorrent()}
         >
           <BsPauseFill />
         </button>
         <button
-          className="bg-gradient-to-r from-red to-redLight transition hover:shadow-md hover:shadow-red/50 text-white rounded-full flex justify-center items-center h-8 w-8 p-1"
+          className="bg-red transition hover:shadow-md hover:shadow-red/50 text-white rounded-full flex justify-center items-center h-8 w-8 p-1"
           onClick={() => deleteTorrent()}
         >
           <BsTrashFill />

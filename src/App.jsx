@@ -15,7 +15,6 @@ import AddTorrentLayout from "./layouts/AddTorrent/AddTorrentLayout";
 import SettingsLayout from "./layouts/Settings/SettingsLayout";
 import { useIsLoggedIn } from "./context/isLoggedInContext";
 import AppLoader from "./layouts/AppLoader/AppLoader";
-import ErrorAppLoader from "./layouts/AppLoader/ErrorAppLoader";
 
 function PrivateWrapper({ isLoggedIn }) {
   return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
@@ -24,11 +23,9 @@ function PrivateWrapper({ isLoggedIn }) {
 function App() {
   const { isLoggedIn, setIsLoggedIn } = useIsLoggedIn();
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    setError(false);
 
     Sync.getMainData()
       .then((res) => {
@@ -41,7 +38,6 @@ function App() {
       })
       .catch((err) => {
         setIsLoading(false);
-        setError(true);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -54,7 +50,6 @@ function App() {
   ];
 
   if (isLoading) return <AppLoader />;
-  if (error) return <ErrorAppLoader />;
   else
     return (
       <Router>

@@ -6,9 +6,7 @@ export function ProgressBar({ progress = 0 }) {
       <div className="w-full h-2 bg-light dark:bg-neutral rounded">
         <div
           className={`${
-            progress === 1
-              ? "bg-green"
-              : "bg-gradient-to-r from-primary to-primaryLight"
+            progress === 1 ? "bg-green" : "bg-primary"
           } h-2 rounded`}
           style={{ width: `${progress * 100}%` }}
         ></div>

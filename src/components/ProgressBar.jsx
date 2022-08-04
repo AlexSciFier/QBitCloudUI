@@ -5,7 +5,7 @@ export function ProgressBar({ progress }) {
     <div className="flex gap-1">
       <div className="w-10 flex-1 border border-light rounded overflow-hidden">
         <div
-          className="h-full basis-12 bg-gradient-to-r from-primary to-primaryLight"
+          className="h-full basis-12 bg-primary"
           style={{ width: `${(progress * 100).toFixed(0)}%` }}
         ></div>
       </div>

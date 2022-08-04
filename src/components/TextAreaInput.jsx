@@ -18,7 +18,7 @@ export function TextAreaInput({
       <textarea
         id={name}
         name={name}
-        className="border bg-transparent border-light dark:border-neutral rounded px-2 py-1"
+        className="border bg-transparent border-light dark:border-neutral rounded px-3 py-2 outline-none focus:ring ring-primary"
         value={value}
         disabled={disabled}
         rows={rows}

@@ -23,7 +23,7 @@ export function Input({
         value={value}
         placeholder={placeholder}
         disabled={disabled}
-        className="border bg-transparent border-light dark:border-neutral rounded px-2 py-1 outline-none focus:ring focus:ring-primary"
+        className="border bg-transparent border-light dark:border-neutral rounded px-3 py-2 disabled:bg-neutral/10 outline-none focus:ring focus:ring-primary"
         onChange={onChangeHandler}
       ></input>
     </BaseInputWrapper>

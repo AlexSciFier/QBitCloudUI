@@ -9,6 +9,7 @@ import { SelectInput } from "../../components/SelectInput";
 import { TagInput } from "../../components/TagInput";
 import { TextAreaInput } from "../../components/TextAreaInput";
 import { TextInput } from "../../components/TextInput";
+import { Input } from "../../components/Input";
 
 export default function AddTorrentLayout() {
   const [categories, setCategories] = useState([]);
@@ -81,7 +82,8 @@ export default function AddTorrentLayout() {
 
         <SelectInput title="Category" name="category" items={categories} />
         <TagInput title="Tags" name="tags" tagList={tags} />
-        <TextInput
+        <Input
+          type="text"
           title="Save path"
           name="savepath"
           description="Download folder"

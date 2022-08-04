@@ -26,14 +26,9 @@ export const ThemeProvider = ({ initialTheme, children }) => {
     "main-color",
     "#06b6d4"
   );
-  const [lSSecondaryColor, setLSSecondaryColor] = useLocalStorage(
-    "secondary-color",
-    "#22d3ee"
-  );
 
   const [theme, setTheme] = useState(lSTheme);
   const [mainColor, setMainColor] = useState(lSMainColor);
-  const [secondaryColor, setSecondaryColor] = useState(lSSecondaryColor);
 
   const rawSetTheme = (rawTheme) => {
     const root = window.document.documentElement;
@@ -58,14 +53,6 @@ export const ThemeProvider = ({ initialTheme, children }) => {
     document.documentElement.style.setProperty("--main-color", mainColor);
   }, [mainColor]);
 
-  useEffect(() => {
-    setLSSecondaryColor(secondaryColor);
-    document.documentElement.style.setProperty(
-      "--secondary-color",
-      secondaryColor
-    );
-  }, [secondaryColor]);
-
   return (
     <ThemeContext.Provider
       value={{
@@ -73,8 +60,6 @@ export const ThemeProvider = ({ initialTheme, children }) => {
         setTheme,
         mainColor,
         setMainColor,
-        secondaryColor,
-        setSecondaryColor,
       }}
     >
       {children}

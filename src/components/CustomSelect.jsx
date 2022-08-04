@@ -49,7 +49,7 @@ export default function CustomSelect({
       ></input>
       <div
         onClick={() => setIsItemsShow(!isItemsShow)}
-        className={`flex gap-1 items-center border border-light dark:border-neutral rounded px-2 py-1 hover:cursor-pointer select-none ${
+        className={`flex gap-1 items-center border border-light dark:border-neutral rounded px-3 py-2 hover:cursor-pointer select-none ${
           disabled ? "bg-light/30 pointer-events-none" : ""
         }`}
       >
