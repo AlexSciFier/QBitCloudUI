@@ -86,7 +86,7 @@ export default function SettingsLayout() {
   return (
     <PageBody title={"Settings"}>
       <div className="flex flex-1 gap-3">
-        <div className="flex flex-col w-1/6 sticky top-8 self-start">
+        <div className="flex flex-col md:w-1/6 w-0 overflow-hidden sticky top-8 self-start">
           {headings?.map((item) => (
             <Link
               key={item.id}

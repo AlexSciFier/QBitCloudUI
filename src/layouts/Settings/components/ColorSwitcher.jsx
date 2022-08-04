@@ -17,7 +17,7 @@ export function ColorSwitcher() {
   return (
     <div className="flex flex-col gap-3">
       <div className="text-xl font-light">Main color</div>
-      <div className="grid grid-cols-6 gap-3">
+      <div className="flex flex-wrap gap-3">
         {mainColors.map((color) => (
           <label key={color.value}>
             <input

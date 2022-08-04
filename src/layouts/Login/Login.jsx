@@ -35,7 +35,10 @@ export default function Login() {
   };
   return (
     <div className="flex justify-center h-screen items-center dark:bg-dark dark:text-white">
-      <form className="flex flex-col gap-3 w-1/4" onSubmit={formSubmit}>
+      <form
+        className="flex flex-col gap-3 md:w-1/4 w-11/12"
+        onSubmit={formSubmit}
+      >
         <Input
           type="text"
           placeholder={"Login"}
