@@ -46,21 +46,21 @@ export default function InfoTab() {
             <div className="text-lg font-medium">
               {properties.nb_connections}
             </div>
-            <div className="text-sm text-neutral">
+            <div className="text-sm text-neutral dark:text-light">
               max. {properties.nb_connections_limit}
             </div>
           </TorrentInfoCard>
 
           <TorrentInfoCard icon={<TrendingUpIcon />} name={"Seeds"}>
             <div className="text-lg font-medium">{properties.seeds}</div>
-            <div className="text-sm text-neutral">
+            <div className="text-sm text-neutral dark:text-light">
               max. {properties.seeds_total}
             </div>
           </TorrentInfoCard>
 
           <TorrentInfoCard icon={<TrendingDownIcon />} name={"Peers"}>
             <div className="text-lg font-medium">{properties.peers}</div>
-            <div className="text-sm text-neutral">
+            <div className="text-sm text-neutral dark:text-light">
               max. {properties.peers_total}
             </div>
           </TorrentInfoCard>
@@ -69,7 +69,7 @@ export default function InfoTab() {
             <div className="text-lg font-medium">
               {toReadableSpeed(properties.dl_speed)}
             </div>
-            <div className="text-sm text-neutral">
+            <div className="text-sm text-neutral dark:text-light">
               avg. {toReadableSpeed(properties.dl_speed_avg)}
             </div>
           </TorrentInfoCard>
@@ -78,7 +78,7 @@ export default function InfoTab() {
             <div className="text-lg font-medium">
               {toReadableSpeed(properties.up_speed)}
             </div>
-            <div className="text-sm text-neutral">
+            <div className="text-sm text-neutral dark:text-light">
               avg. {toReadableSpeed(properties.up_speed_avg)}
             </div>
           </TorrentInfoCard>
@@ -87,7 +87,7 @@ export default function InfoTab() {
             <div className="text-lg font-medium">
               {toReadableSize(properties.total_downloaded)}
             </div>
-            <div className="text-sm text-neutral">
+            <div className="text-sm text-neutral dark:text-light">
               in this session{" "}
               {toReadableSize(properties.total_downloaded_session)}
             </div>
@@ -97,7 +97,7 @@ export default function InfoTab() {
             <div className="text-lg font-medium">
               {toReadableSize(properties.total_uploaded)}
             </div>
-            <div className="text-sm text-neutral">
+            <div className="text-sm text-neutral dark:text-light">
               in this session{" "}
               {toReadableSize(properties.total_uploaded_session)}
             </div>
@@ -134,7 +134,7 @@ export default function InfoTab() {
             <div className="text-lg font-medium">
               {properties.pieces_num} x {toReadableSize(properties.piece_size)}
             </div>
-            <div className="text-sm text-neutral">
+            <div className="text-sm text-neutral dark:text-light">
               have {properties.pieces_have}
             </div>
           </TorrentInfoCard>

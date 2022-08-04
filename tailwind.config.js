@@ -9,9 +9,9 @@ module.exports = {
     colors: {
       primary: "var(--main-color)", //colors.cyan[500],
       primaryLight: "var(--secondary-color)", //colors.cyan[400],
-      light: colors.gray[200],
-      neutral: colors.gray[500],
-      dark: colors.gray[900],
+      light: colors.neutral[200],
+      neutral: colors.neutral[500],
+      dark: colors.neutral[800],
       white: colors.white,
       black: colors.black,
       red: colors.red[500],
