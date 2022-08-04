@@ -26,7 +26,7 @@ export default function MainLayout() {
                   <section className="flex flex-1 overflow-hidden divide-light">
                     <section
                       className={
-                        "xl:w-1/6 flex-none shadow-lg transition-transform overflow-hidden " +
+                        "xl:w-1/6 flex-none shadow-lg dark:shadow-primary transition-transform overflow-hidden " +
                         leftMenuTranslate
                       }
                     >
