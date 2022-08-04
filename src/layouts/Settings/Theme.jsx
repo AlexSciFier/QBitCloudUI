@@ -1,7 +1,6 @@
 import { MoonIcon, PencilIcon } from "@heroicons/react/outline";
 import SunIcon from "@heroicons/react/outline/SunIcon";
 import React, { useState } from "react";
-import { SelectInput } from "../../components/SelectInput";
 import { useTheme } from "../../context/themeContext";
 
 export default function Theme() {
@@ -15,7 +14,6 @@ export default function Theme() {
 
 function ColorSwitcher() {
   const { mainColor, setMainColor } = useTheme();
-  const [customColor, setCustomColor] = useState(mainColor);
   const [customColorSelected, setCustomColorSelected] = useState(false);
 
   const mainColors = [
@@ -55,18 +53,23 @@ function ColorSwitcher() {
             value={mainColor}
             className="hidden"
             onChange={(e) => {
-              setCustomColor(e.target.value);
               setCustomColorSelected(true);
               if (customColorSelected) {
                 setMainColor(e.target.value);
               }
             }}
           ></input>
+          <input
+            type={"radio"}
+            name="main-color"
+            className="hidden peer"
+            checked={customColorSelected}
+          ></input>
           <div
-            className="w-12 h-12 rounded-full peer-checked:ring dark:peer-checked:ring-white peer-checked:ring-dark"
+            className="w-12 h-12 rounded-full peer-checked:ring dark:ring-white ring-black"
             style={{ backgroundColor: mainColor }}
           ></div>
-          <PencilIcon className="w-6 h-6 absolute top-3 left-3 text-white mix-blend-difference" />
+          <PencilIcon className="w-6 h-6 absolute top-3 left-3 text-white" />
         </label>
       </div>
     </div>
