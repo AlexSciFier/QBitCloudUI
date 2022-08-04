@@ -41,12 +41,14 @@ export function UpdateDataProvider({ children }) {
   const { setIsLoggedIn } = useIsLoggedIn();
 
   useEffect(() => {
+    manualUpdateData(true);
     return () => {
       stopUpdate();
     };
   }, []);
 
   useEffect(() => {
+    if (updatedData?.server_state) updateGlobalInfo(updatedData.server_state);
     if (updatedData?.torrents) updateTorrentList(updatedData.torrents);
     if (updatedData?.torrents_removed)
       deleteTorrents(updatedData.torrents_removed);
@@ -57,8 +59,6 @@ export function UpdateDataProvider({ children }) {
 
     if (updatedData?.tags) updateTags(updatedData.tags);
     if (updatedData?.tags_removed) deleteTags(updatedData.tags_removed);
-
-    updateGlobalInfo(updatedData?.server_state || {});
 
     if (updatedData?.server_state?.refresh_interval)
       setRefreshRate(updatedData.server_state.refresh_interval);
@@ -72,18 +72,12 @@ export function UpdateDataProvider({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refreshRate]);
 
-  const manualUpdateData = async () => {
-    let res = await Sync.getMainData();
+  const manualUpdateData = async (fullUpdate = false) => {
+    let res = await Sync.getMainData(fullUpdate);
     if (res === undefined) {
       setIsLoggedIn(false);
     }
     setUpdateData(res);
-  };
-
-  const startUpdate = async () => {
-    timer = setInterval(async () => {
-      manualUpdateData();
-    }, refreshRate);
   };
 
   const stopUpdate = () => {
@@ -94,10 +88,6 @@ export function UpdateDataProvider({ children }) {
     <UpdateData.Provider
       value={{
         updatedData,
-        setUpdateData,
-        manualUpdateData,
-        startUpdate,
-        stopUpdate,
       }}
     >
       {children}
