@@ -39,7 +39,7 @@ function TreeItemBody({ part, size, progress, priority }) {
       <div className="flex gap-1 justify-end flex-grow">
         <div className="text-neutral flex-none">{priorityEnum[priority]}</div>
         <div className="text-neutral flex-none basis-20">
-          {toReadableSize(size)}
+          [{toReadableSize(size)}]
         </div>
         <div className="xl:basis-80 xl:flex-initial flex-1">
           <ProgressBar progress={progress} />
