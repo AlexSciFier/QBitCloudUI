@@ -53,7 +53,7 @@ export default function TrackersTab() {
   ];
 
   return (
-    <div>
+    <div className="overflow-x-auto">
       <Table rows={rows} columns={cols} />
     </div>
   );
