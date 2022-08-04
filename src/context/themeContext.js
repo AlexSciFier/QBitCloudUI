@@ -12,12 +12,39 @@ function getPreferedScheme() {
 }
 
 const ThemeContext = React.createContext();
+/**
+ * @typedef {Object} LeftPanelDefaulValues
+ * @property {boolean} showSpeedGraph
+ * @property {boolean} showCurentSpeedValues
+ * @property {boolean} showAllTimeDataTransfer
+ * @property {boolean} showFreeSpace
+ */
+/**
+ * @typedef {Object} ThemeContextValue
+ * @property {string} theme
+ * @property {React.Dispatch<React.SetStateAction<string>>} setTheme
+ * @property {string} mainColor
+ * @property {React.Dispatch<React.SetStateAction<string>>} setMainColor
+ * @property {LeftPanelDefaulValues} leftPanelSettings
+ * @property {React.Dispatch<React.SetStateAction<LeftPanelDefaulValues>>} setLeftPanelSettings
+ */
 
+/**
+ *
+ * @returns {ThemeContextValue}
+ */
 export function useTheme() {
   return useContext(ThemeContext);
 }
 
 export const ThemeProvider = ({ initialTheme, children }) => {
+  const leftPanelDefaultSettings = {
+    showSpeedGraph: true,
+    showCurentSpeedValues: true,
+    showAllTimeDataTransfer: true,
+    showFreeSpace: true,
+  };
+
   const [lSTheme, setLSTheme] = useLocalStorage(
     "theme-mode",
     getPreferedScheme()
@@ -26,9 +53,15 @@ export const ThemeProvider = ({ initialTheme, children }) => {
     "main-color",
     "#06b6d4"
   );
+  const [lSLeftPanelSettings, setLSLeftPanelSettings] = useLocalStorage(
+    "left-panel",
+    JSON.stringify(leftPanelDefaultSettings)
+  );
 
   const [theme, setTheme] = useState(lSTheme);
   const [mainColor, setMainColor] = useState(lSMainColor);
+  const [leftPanelSettings, setLeftPanelSettings] =
+    useState(lSLeftPanelSettings);
 
   const rawSetTheme = (rawTheme) => {
     const root = window.document.documentElement;
@@ -53,6 +86,10 @@ export const ThemeProvider = ({ initialTheme, children }) => {
     document.documentElement.style.setProperty("--main-color", mainColor);
   }, [mainColor]);
 
+  useEffect(() => {
+    setLSLeftPanelSettings(leftPanelSettings);
+  }, [leftPanelSettings]);
+
   return (
     <ThemeContext.Provider
       value={{
@@ -60,6 +97,8 @@ export const ThemeProvider = ({ initialTheme, children }) => {
         setTheme,
         mainColor,
         setMainColor,
+        leftPanelSettings,
+        setLeftPanelSettings,
       }}
     >
       {children}
