@@ -66,12 +66,19 @@ export var postMultipart = async (endpoint, data) => {
 };
 
 export var postURLEncoded = async (endpoint, data) => {
-  var searchparams = new URLSearchParams(data);
-  return await fetch(new URL(endpoint + "?" + searchparams, BASE_URL), {
+  var formBody = [];
+  for (var property in data) {
+    var encodedKey = encodeURIComponent(property);
+    var encodedValue = encodeURIComponent(data[property]);
+    formBody.push(encodedKey + "=" + encodedValue);
+  }
+  formBody = formBody.join("&");
+  return await fetch(new URL(endpoint, BASE_URL), {
     method: "POST",
     credentials: "include",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
+    body: formBody,
   });
 };

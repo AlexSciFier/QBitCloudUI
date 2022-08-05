@@ -1,4 +1,4 @@
-import { get, postMultipart } from "./baseApi";
+import { get, postMultipart, postURLEncoded } from "./baseApi";
 
 /**
  * @typedef {Object} TorrentInfo
@@ -240,6 +240,31 @@ export default class Torrents {
   static getAllTags = async () => {
     return await get(this.#endpoint + "/tags");
   };
+
+  static rename = async (hash, name) => {
+    return await postURLEncoded(this.#endpoint + "/rename", { hash, name });
+  };
+
+  static setCategory = async (hashes, category) => {
+    hashes = hashes.join("|");
+    return await postURLEncoded(this.#endpoint + "/setCategory", {
+      hashes,
+      category,
+    });
+  };
+
+  static addTags = async (hashes, tags) => {
+    hashes = hashes.join("|");
+    return await postURLEncoded(this.#endpoint + "/addTags", { hashes, tags });
+  };
+
+  static removeTags = async (hashes, tags) => {
+    hashes = hashes.join("|");
+    return await postURLEncoded(this.#endpoint + "/removeTags", {
+      hashes,
+      tags,
+    });
+  };
 }
 
 // TODO
@@ -258,13 +283,9 @@ export default class Torrents {
 // uploadLimit
 // setUploadLimit
 // setLocation
-// rename
-// setCategory
 // createCategory
 // editCategory
 // removeCategories
-// addTags
-// removeTags
 // createTags
 // deleteTags
 // setAutoManagement

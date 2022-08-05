@@ -1,8 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import debounce from "lodash/debounce";
 
-export default function CustomTagInput({ name, onFetchCallback, delay = 500 }) {
-  const [tags, setTags] = useState([]);
+export default function CustomTagInput({
+  name,
+  defaultTags = [],
+  onFetchCallback,
+  delay = 500,
+}) {
+  const [tags, setTags] = useState(defaultTags);
   const [tagInput, setTagInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
