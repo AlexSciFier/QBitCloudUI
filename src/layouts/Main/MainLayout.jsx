@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import LeftPanel from "../LeftPanel/LeftPanel";
-import { isMobile } from "react-device-detect";
 import TorrentList from "./TorrentList";
 import { TorrentFilterProvider } from "../../context/torrentFilterContext";
 import { GlobalInfoProvider } from "../../context/globalInfoContext";
@@ -11,10 +10,18 @@ import { CategoriesProvider } from "../../context/categoriesContext";
 import { TagsProvider } from "../../context/tagsContext";
 import { UpdateDataProvider } from "../../context/updateDataContext";
 import TorrentFilter from "./TorrentFilter";
+import { useMediaQuery } from "react-responsive";
 
 export default function MainLayout() {
+  const isMobile = useMediaQuery({
+    query: "(max-width: 1024px)",
+  });
   const [menuOpened, setMenuOpened] = useState(!isMobile);
-  let leftMenuTranslate = menuOpened ? "w-5/6" : `-translate-x-full w-0`;
+  let leftMenuMobile = `fixed z-50 w-96 h-full transition-transform ${
+    menuOpened ? "translate-x-0" : "-translate-x-full"
+  }`;
+  let leftMenuDesktop =
+    "flex-none transition-transform overflow-y-hidden shadow-lg dark:shadow-primary";
   return (
     <GlobalInfoProvider>
       <TorrentListProvider>
@@ -23,16 +30,18 @@ export default function MainLayout() {
             <UpdateDataProvider>
               <TorrentFilterProvider>
                 <div className="h-screen flex flex-col dark:bg-dark dark:text-white">
-                  <section className="flex flex-1 overflow-hidden divide-light">
-                    <section
-                      className={
-                        "xl:w-1/6 flex-none shadow-lg dark:shadow-primary transition-transform overflow-hidden " +
-                        leftMenuTranslate
-                      }
+                  <section
+                    className={
+                      isMobile ? "" : "flex flex-1 overflow-hidden divide-light"
+                    }
+                  >
+                    <div
+                      aria-hidden={!menuOpened}
+                      className={isMobile ? leftMenuMobile : leftMenuDesktop}
                     >
-                      <LeftPanel />
-                    </section>
-                    <section className="flex flex-col gap-1 flex-1 min-w-0">
+                      <LeftPanel setMenuOpened={setMenuOpened} />
+                    </div>
+                    <div className="flex flex-col gap-1 w-full h-screen">
                       <Navbar
                         onOpenMenuClick={() => setMenuOpened(!menuOpened)}
                       />
@@ -40,7 +49,7 @@ export default function MainLayout() {
                       <section className="flex-1 p-3 overflow-y-auto">
                         <TorrentList />
                       </section>
-                    </section>
+                    </div>
                   </section>
                 </div>
               </TorrentFilterProvider>

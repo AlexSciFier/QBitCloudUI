@@ -1,7 +1,7 @@
 import React from "react";
 import { CogIcon, MenuIcon, PlusIcon } from "@heroicons/react/outline";
 import LinkButton from "./LinkButton";
-import { isMobile } from "react-device-detect";
+import { useMediaQuery } from "react-responsive";
 
 function HamburgerMenu({ onOpenMenuClick }) {
   return (
@@ -15,6 +15,9 @@ function HamburgerMenu({ onOpenMenuClick }) {
 }
 
 export default function Navbar({ onOpenMenuClick }) {
+  const isMobile = useMediaQuery({
+    query: "(max-width: 1024px)",
+  });
   return (
     <div className="flex justify-between p-3">
       <div className="flex gap-3 items-center">
