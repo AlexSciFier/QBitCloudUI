@@ -19,7 +19,7 @@ export default function LeftPanel({ setMenuOpened }) {
           />
         </div>
       )}
-      <div className="p-3 h-full flex flex-col gap-3 overflow-y-auto overflow-x-hidden flex-1 bg-white dark:bg-dark shadow-lg dark:shadow-primary">
+      <div className="p-3 h-full flex flex-col gap-3 overflow-y-auto overflow-x-hidden flex-1 bg-white dark:bg-dark">
         <GlobalInfo />
         <Categories />
         <Tags />
