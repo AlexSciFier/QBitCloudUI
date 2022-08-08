@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Authentication from "../../api/authenticationApi";
 import { Input } from "../../components/Input";
-import { InputPassword, InputText } from "../../components/Inputs";
 import PrimaryButton from "../../components/PrimaryButton";
 import { useIsLoggedIn } from "../../context/isLoggedInContext";
 
@@ -18,8 +17,7 @@ export default function Login() {
 
   useEffect(() => {
     if (isLoggedIn) navigate("/");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
 
   var formSubmit = async (e) => {
     e.preventDefault();

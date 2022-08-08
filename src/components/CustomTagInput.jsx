@@ -11,6 +11,7 @@ export default function CustomTagInput({
   const [tagInput, setTagInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounced = useCallback(debounce(onFetch, delay), [tagInput]);
 
   async function onFetch() {

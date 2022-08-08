@@ -48,6 +48,7 @@ function SpeedChart() {
         },
       ];
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [torrentItem]);
 
   return (

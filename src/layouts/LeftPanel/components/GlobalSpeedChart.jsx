@@ -36,6 +36,7 @@ export function GlobalSpeedChart() {
         },
       ];
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [globalInfo]);
 
   return (

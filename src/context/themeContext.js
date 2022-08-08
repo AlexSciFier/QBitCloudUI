@@ -79,15 +79,18 @@ export const ThemeProvider = ({ initialTheme, children }) => {
 
   useEffect(() => {
     rawSetTheme(theme);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme]);
 
   useEffect(() => {
     setLSMainColor(mainColor);
     document.documentElement.style.setProperty("--main-color", mainColor);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mainColor]);
 
   useEffect(() => {
     setLSLeftPanelSettings(leftPanelSettings);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [leftPanelSettings]);
 
   return (

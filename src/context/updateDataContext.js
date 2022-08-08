@@ -45,6 +45,7 @@ export function UpdateDataProvider({ children }) {
     return () => {
       stopUpdate();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
