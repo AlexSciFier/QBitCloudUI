@@ -1,3 +1,25 @@
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #737373 transparent;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #737373;
+  border-radius: 20px;
+  border: 3px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+}
+
 .loading-spin {
   -webkit-animation: rotate-center 1s cubic-bezier(0.75, -0.2, 0.25, 1.2)
     infinite reverse both;
