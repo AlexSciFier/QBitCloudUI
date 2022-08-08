@@ -55,7 +55,7 @@ export const ThemeProvider = ({ initialTheme, children }) => {
   );
   const [lSLeftPanelSettings, setLSLeftPanelSettings] = useLocalStorage(
     "left-panel",
-    JSON.stringify(leftPanelDefaultSettings)
+    leftPanelDefaultSettings
   );
 
   const [theme, setTheme] = useState(lSTheme);
