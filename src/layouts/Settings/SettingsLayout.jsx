@@ -22,8 +22,12 @@ import Speed from "./Speed";
 import WebUI from "./WebUI";
 import { Link, useLocation } from "react-router-dom";
 import Theme from "./Theme";
+import { useMediaQuery } from "react-responsive";
 
 export default function SettingsLayout() {
+  const isMobile = useMediaQuery({
+    query: "(max-width: 1024px)",
+  });
   const location = useLocation();
   /**
    * @type {[import("../../api/applicationApi").preferences, React.Dispatch<React.SetStateAction<import("../../api/applicationApi").preferences>>]}
@@ -85,13 +89,18 @@ export default function SettingsLayout() {
 
   return (
     <PageBody title={"Settings"}>
-      <div className="flex flex-1 gap-3">
-        <div className="flex flex-col md:w-1/6 w-0 overflow-hidden sticky top-8 self-start">
+      <div className="flex flex-1 gap-3 flex-col md:flex-row">
+        <div className="flex flex-row overflow-x-auto w-full gap-3 md:gap-0 md:flex-col md:w-2/6 overflow-hidden sticky top-14 self-start z-10 bg-white dark:bg-dark">
           {headings?.map((item) => (
             <Link
               key={item.id}
-              className={"px-1 py-1 rounded hover:bg-primary hover:text-white"}
-              style={{ marginLeft: `${item.level - 1}rem` }}
+              className={
+                "px-1 py-1 rounded hover:bg-primary hover:text-white whitespace-nowrap"
+              }
+              style={{
+                marginLeft: `${item.level - 1}rem`,
+                display: `${isMobile && item.level > 1 ? "none" : "block"}`,
+              }}
               to={`/settings#${item.id}`}
             >
               {item.text}
