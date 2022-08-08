@@ -90,8 +90,8 @@ export default function TorrentFilter() {
     },
   ];
   return (
-    <div className="px-3 flex gap-1 items-center">
-      <div className="flex-none basis-40">
+    <div className="px-3 flex gap-1 items-stretch md:items-center md:flex-row flex-col">
+      <div className="flex-none md:basis-40">
         <CustomSelect
           onSelect={(e) =>
             setFilter((prev) => ({
