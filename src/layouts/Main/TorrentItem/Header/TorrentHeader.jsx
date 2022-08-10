@@ -31,11 +31,11 @@ export function TorrentHeader({ isOpen, onClick }) {
         </div>
         <div className="flex flex-none gap-1">
           <SpeedIndicator
-            speed={torrentItem.downSpeed}
+            speed={torrentItem.dlspeed}
             isDirectionUpload={false}
           />
           <SpeedIndicator
-            speed={torrentItem.upSpeed}
+            speed={torrentItem.upspeed}
             isDirectionUpload={true}
           />
         </div>

@@ -213,7 +213,7 @@ export default class Torrents {
     firstLastPiecePrio = false,
     sequentialDownload = false,
   }) => {
-    let res = await postMultipart(this.#endpoint + "/add", {
+    return await postMultipart(this.#endpoint + "/add", {
       urls,
       torrents,
       savepath,
@@ -230,7 +230,6 @@ export default class Torrents {
       firstLastPiecePrio,
       sequentialDownload,
     });
-    return await res.text();
   };
 
   static getAllCategories = async () => {

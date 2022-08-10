@@ -78,6 +78,7 @@ export function UpdateDataProvider({ children }) {
     if (res === undefined) {
       setIsLoggedIn(false);
     }
+    delete res.rid;
     setUpdateData(res);
   };
 

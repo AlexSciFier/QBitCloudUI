@@ -1,10 +1,14 @@
 import isEmpty from "lodash/isEmpty";
+import { getPlaceholderValue } from "./demoAPI";
 const BASE_URL =
   process.env.NODE_ENV === "production"
     ? document.location.origin
     : "http://localhost:8080";
 
 export var get = async (endpoint, params = {}) => {
+  if (process.env.REACT_APP_DEMO === "true") {
+    return (await getPlaceholderValue("GET", endpoint, params)).json();
+  }
   var searchParams = "";
   if (isEmpty(params) === false) {
     let filteredParams = Object.entries(params).filter((entry) => {
@@ -31,6 +35,8 @@ export var get = async (endpoint, params = {}) => {
 };
 
 export var postJSON = async (endpoint, data) => {
+  if (process.env.REACT_APP_DEMO === "true")
+    return await getPlaceholderValue("POST", endpoint, data);
   return await fetch(new URL(endpoint, BASE_URL), {
     method: "POST",
     credentials: "include",
@@ -42,6 +48,8 @@ export var postJSON = async (endpoint, data) => {
 };
 
 export var postMultipart = async (endpoint, data) => {
+  if (process.env.REACT_APP_DEMO === "true")
+    return await getPlaceholderValue("POST", endpoint, data);
   let filteredData = Object.entries(data).filter((entry) => {
     if (entry[1]) return true;
     return false;
@@ -66,6 +74,8 @@ export var postMultipart = async (endpoint, data) => {
 };
 
 export var postURLEncoded = async (endpoint, data) => {
+  if (process.env.REACT_APP_DEMO === "true")
+    return getPlaceholderValue("POST", endpoint, data).json();
   var formBody = [];
   for (var property in data) {
     var encodedKey = encodeURIComponent(property);

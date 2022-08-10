@@ -42,9 +42,9 @@ export default function AddTorrentLayout() {
       skip_checking: form.skip_checking.checked,
       firstLastPiecePrio: form.firstLastPiecePrio.cheched,
       sequentialDownload: form.sequentialDownload.cheched,
-    }).then((res) => {
+    }).then(async (res) => {
       setIsLoading(false);
-      if (res === "Ok.") navigate("/");
+      if ((await res.text()) === "Ok.") navigate("/");
     });
   }
 
