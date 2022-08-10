@@ -16,7 +16,7 @@ export default function PageBody({ children, title }) {
 function PageHeader({ title }) {
   const navigate = useNavigate();
   return (
-    <div className="flex py-3 gap-3 items-center sticky top-0 bg-white dark:bg-dark z-10 px-3 pt-3">
+    <div className="flex py-3 gap-3 items-center sticky top-0 bg-white dark:bg-dark z-20 px-3 pt-3">
       <button
         onClick={() => navigate("/")}
         className="w-8 h-8 p-1 hover:bg-light dark:hover:bg-neutral/30 rounded-full"

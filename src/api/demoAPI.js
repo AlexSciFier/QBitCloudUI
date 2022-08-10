@@ -473,6 +473,15 @@ let data = {
   "/api/v2/torrents/files": handleFile(),
   "/api/v2/torrents/trackers": handleTrackers(),
   "/api/v2/torrents/properties": handleTorrentProperties(),
+  "/api/v2/app/version": "DEMO VERSION",
+  "/api/v2/app/buildInfo": {
+    bitness: 32,
+    boost: "1.79.0",
+    libtorrent: "2.0.6.0",
+    openssl: "1.1.1o",
+    qt: "5.15.4",
+    zlib: "1.2.12",
+  },
 };
 
 let maindata = {

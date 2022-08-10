@@ -23,6 +23,7 @@ import WebUI from "./WebUI";
 import { Link, useLocation } from "react-router-dom";
 import Theme from "./Theme";
 import { useMediaQuery } from "react-responsive";
+import About from "./About";
 
 export default function SettingsLayout() {
   const isMobile = useMediaQuery({
@@ -137,7 +138,7 @@ export default function SettingsLayout() {
               <WebUI settings={settings} />
             </SettingsBody>
             <SettingsBody icon={<QuestionMarkCircleIcon />} title={"About"}>
-              <div>About</div>
+              <About />
             </SettingsBody>
           </form>
         </div>
