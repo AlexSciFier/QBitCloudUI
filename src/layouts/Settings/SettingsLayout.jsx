@@ -165,7 +165,7 @@ export default function SettingsLayout() {
 
 function UnsavedChangesPopup({ onUndo, onSave, isSaving }) {
   return (
-    <div className="sticky bottom-3 flex justify-between items-center bg-white dark:bg-dark dark:border dark:border-neutral py-1 px-3 rounded-md shadow-md">
+    <div className="sticky bottom-3 z-50 flex justify-between items-center bg-white dark:bg-dark dark:border dark:border-neutral py-1 px-3 rounded-md shadow-md">
       <div>Unsaved changes</div>
       <div className="flex gap-3">
         <SecondaryButton onClick={onUndo}>Undo</SecondaryButton>
