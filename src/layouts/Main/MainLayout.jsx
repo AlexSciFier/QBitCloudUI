@@ -17,7 +17,7 @@ export default function MainLayout() {
     query: "(max-width: 1024px)",
   });
   const [menuOpened, setMenuOpened] = useState(!isMobile);
-  let leftMenuMobile = `fixed z-50 w-96 h-full transition-transform ${
+  let leftMenuMobile = `fixed z-50 w-80 h-full transition-transform ${
     menuOpened ? "translate-x-0" : "-translate-x-full"
   }`;
   let leftMenuDesktop =
