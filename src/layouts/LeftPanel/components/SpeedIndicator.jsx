@@ -7,7 +7,7 @@ import { StatusCard } from "./StatusCard";
 export function SpeedIndicator() {
   const { globalInfo } = useGlobalInfo();
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between gap-1">
       <div className="flex flex-col gap-1">
         <StatusCard
           icon={<ArrowSmDownIcon />}
