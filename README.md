@@ -6,6 +6,13 @@ QBitCloud is an alternative web ui for qBitTorrent.
 
 [Live Demo](https://qbit-cloud-ui.vercel.app/)
 
+### Features
+
+- Modern design
+- Optimized for mobile
+- Dark/Light mode
+- Custom color themes
+
 ## Installation
 
 - Download the latest build from Releases.
