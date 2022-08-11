@@ -11,10 +11,15 @@ export default function About() {
 
   return (
     <div>
-      <a className="text-primary hover:underline" href="/">
+      <div className="font-medium mt-3">QBitCloud UI</div>
+      <div>v 1.0</div>
+      <a
+        className="text-primary hover:underline"
+        href="https://github.com/AlexSciFier/QBitCloudUI"
+      >
         GitHub
       </a>
-      <div className="font-medium mt-3">Version</div>
+      <div className="font-medium mt-3">Client version</div>
       <div>{appVersion}</div>
       <div className="font-medium mt-3">Build info</div>
       <div>
