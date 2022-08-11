@@ -120,7 +120,7 @@ export default function PeersTab() {
   }
 
   return (
-    <div className="">
+    <div className="overflow-x-auto">
       {rows.length > 0 ? (
         <Table rows={rows} columns={cols} />
       ) : (
