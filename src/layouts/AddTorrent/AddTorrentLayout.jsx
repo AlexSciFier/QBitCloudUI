@@ -14,6 +14,8 @@ export default function AddTorrentLayout() {
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [currentPath, setCurrentPath] = useState("");
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,6 +25,7 @@ export default function AddTorrentLayout() {
         ...Object.entries(res).map((entry) => ({
           name: entry[1].name,
           value: entry[1].name,
+          path: entry[1].savePath || entry[1].save_path, //save_path in old api verion
         })),
       ]);
     });
@@ -77,13 +80,24 @@ export default function AddTorrentLayout() {
           />
         </div>
 
-        <SelectInput title="Category" name="category" items={categories} />
+        <SelectInput
+          title="Category"
+          name="category"
+          items={categories}
+          onSelect={(e) =>
+            setCurrentPath(
+              categories.filter((c) => c.value === e.target.value)[0]?.path || ""
+            )
+          }
+        />
         <TagInput title="Tags" name="tags" />
         <Input
           type="text"
           title="Save path"
           name="savepath"
           description="Download folder"
+          value={currentPath}
+          onChange={e=>setCurrentPath(e.target.value)}
         />
         <PrimaryButton isLoading={isLoading}>Add torrent</PrimaryButton>
       </form>
