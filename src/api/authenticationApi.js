@@ -1,4 +1,4 @@
-import { get } from "./baseApi";
+import { get, postURLEncoded } from "./baseApi";
 
 export default class Authentication {
   static #endpoint = "/api/v2/auth";
@@ -9,8 +9,8 @@ export default class Authentication {
    * @returns
    */
   static login = async (username, password) => {
-    let res = await get(this.#endpoint + "/login", { username, password });
-    if (res === "Ok.") return { ok: true, message: "" };
+    let res = await postURLEncoded(this.#endpoint + "/login", { username, password });
+    if (res !== undefined) return { ok: true, message: "" };
     return { ok: false, message: res };
   };
 

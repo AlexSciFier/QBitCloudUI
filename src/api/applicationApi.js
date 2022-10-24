@@ -1,4 +1,4 @@
-import { get } from "./baseApi";
+import { get, postJSON, postURLEncoded } from "./baseApi";
 
 /**
  * @typedef {Object} preferences
@@ -184,7 +184,7 @@ export default class Application {
     return res;
   };
   static setPreferences = async (json) => {
-    let res = await get(this.#endpoint + "/setPreferences", {
+    let res = await postURLEncoded(this.#endpoint + "/setPreferences", {
       json: JSON.stringify(json),
     });
     return res;

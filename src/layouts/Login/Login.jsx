@@ -23,6 +23,7 @@ export default function Login() {
     e.preventDefault();
     setIsLoading(true);
     let loginRes = await Authentication.login(login, passowrd);
+    console.log(loginRes)
     if (loginRes.ok) {
       setIsLoggedIn(true);
       navigate("/");
