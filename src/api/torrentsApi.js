@@ -178,7 +178,7 @@ export default class Torrents {
    * @returns
    */
   static delete = async (hashes, deleteFiles = false) => {
-    return await get(this.#endpoint + "/delete", { hashes, deleteFiles });
+    return await postURLEncoded(this.#endpoint + "/delete", { hashes, deleteFiles });
   };
   /**
    *
