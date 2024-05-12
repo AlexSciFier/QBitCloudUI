@@ -14,7 +14,7 @@ import { useMediaQuery } from "react-responsive";
 
 export default function MainLayout() {
   const isMobile = useMediaQuery({
-    query: "(max-width: 1024px)",
+    query: "(max-width: 1440px)",
   });
   const [menuOpened, setMenuOpened] = useState(!isMobile);
   let leftMenuMobile = `fixed z-50 w-80 h-full transition-transform ${

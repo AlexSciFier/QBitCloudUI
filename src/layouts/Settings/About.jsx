@@ -12,7 +12,7 @@ export default function About() {
   return (
     <div>
       <div className="font-medium mt-3">QBitCloud UI</div>
-      <div>v 1.0</div>
+      <div>v 1.0.2</div>
       <a
         className="text-primary hover:underline"
         href="https://github.com/AlexSciFier/QBitCloudUI"
