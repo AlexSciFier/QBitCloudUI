@@ -16,7 +16,7 @@ function HamburgerMenu({ onOpenMenuClick }) {
 
 export default function Navbar({ onOpenMenuClick }) {
   const isMobile = useMediaQuery({
-    query: "(max-width: 1024px)",
+    query: "(max-width: 1440px)",
   });
   return (
     <div className="flex justify-between p-3">

@@ -7,7 +7,7 @@ import { XIcon } from "@heroicons/react/outline";
 
 export default function LeftPanel({ setMenuOpened }) {
   const isMobile = useMediaQuery({
-    query: "(max-width: 1024px)",
+    query: "(max-width: 1440px)",
   });
   return (
     <>
